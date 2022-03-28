@@ -8,21 +8,19 @@ const PASSWORD_INPUT = 'password-input';
 const SUBMIT_BUTTON = 'login-submit-btn';
 
 describe('2 - Crie um componente chamado `Login`', () => {
-  it('Será validado se existe uma `input` que possui o data-testid', () => {
+  it('Será validado se existe um `input-email`', () => {
     render(<Login />);
     const inputEmail = screen.getByTestId(EMAIL_INPUT);
     expect(inputEmail).toBeInTheDocument();
   });
 
-  it(`Será validado se existe uma 'input' que possui o 
-      data-testid="password-input"`, () => {
+  it('Será validado se existe um `input-password`', () => {
     render(<Login />);
     const inputPassword = screen.getByTestId(PASSWORD_INPUT);
     expect(inputPassword).toBeInTheDocument();
   });
 
-  it(`Será validado se existe um 'button' que possui o 
-      data-testid="login-submit-btn"`, () => {
+  it('Será validado se existe um `login-submit-btn`', () => {
     render(<Login />);
     const submitButton = screen.getByTestId(SUBMIT_BUTTON);
     expect(submitButton).toBeInTheDocument();
@@ -30,8 +28,7 @@ describe('2 - Crie um componente chamado `Login`', () => {
 });
 
 describe('3 - Verificar se é possível escrever no "input" de email', () => {
-  it(`Será validado se existe uma 'input' que possui o 
-      data-testid="email-input"`, () => {
+  it('Será validado se é possível escrever no "input" de email', () => {
     render(<Login />);
     const inputEmail = screen.getByTestId(EMAIL_INPUT);
     userEvent.type(inputEmail, 'teste1@teste.com');
@@ -40,8 +37,7 @@ describe('3 - Verificar se é possível escrever no "input" de email', () => {
 });
 
 describe('4 - Verificar se é possível escrever no "input" de senha', () => {
-  it(`Será validado se existe um 'input' que possui o 
-      data-testid="password-input"`, () => {
+  it('Será validado se é possível escrever no "input" de senha', () => {
     render(<Login />);
     const inputPassword = screen.getByTestId(PASSWORD_INPUT);
     userEvent.type(inputPassword, '1234567');
