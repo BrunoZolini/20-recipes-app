@@ -32,3 +32,13 @@ describe('3 - Verificar se é possível escrever no "input" de email', () => {
     expect(inputEmail).toHaveValue('teste@teste.com');
   });
 });
+
+describe('4 - Verificar se é possível escrever no "input" de senha', () => {
+  it(`Será validado se existe uma 'input' que possui o 
+      data-testid="password-input"`, () => {
+    render(<Login />);
+    const inputSenha = screen.getByTestId('password-input');
+    userEvent.type(inputSenha, '123456');
+    expect(inputSenha).toHaveValue('123456');
+  });
+});
