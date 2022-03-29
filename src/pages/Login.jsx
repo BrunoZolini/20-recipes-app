@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -15,11 +16,14 @@ export default function Login() {
     }
   }, [email, password]);
 
-  const handleClick = () => {
+  const history = useHistory();
+  const handleClick = (e) => {
+    e.preventDefault();
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     const userEmail = { email };
     localStorage.setItem('user', JSON.stringify(userEmail));
+    history.push('/foods');
   };
 
   return (

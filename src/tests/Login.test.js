@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import renderWithRouter from '../service/renderWithRouter';
 import Login from '../pages/Login';
 
 const EMAIL_INPUT = 'email-input';
@@ -67,7 +68,7 @@ describe(`6 - Salve 2 tokens no localStorage após a submissão, identificados p
       chaves mealsToken e cocktailsToken`, () => {
   it(`Após a submissão mealsToken e cocktailsToken 
       devem estar salvos em localStorage`, () => {
-    render(<Login />);
+    renderWithRouter(<Login />);
 
     const submitButton = screen.getByTestId(SUBMIT_BUTTON);
     const inputEmail = screen.getByTestId(EMAIL_INPUT);
@@ -88,7 +89,7 @@ describe(`6 - Salve 2 tokens no localStorage após a submissão, identificados p
 describe(`7 - Salve o e-mail da pessoa usuária no localStorage 
       na chave user após a submissão`, () => {
   it('Após a submissão a chave user deve estar salva em localStorage', () => {
-    render(<Login />);
+    renderWithRouter(<Login />);
 
     const submitButton = screen.getByTestId(SUBMIT_BUTTON);
     const inputEmail = screen.getByTestId(EMAIL_INPUT);
@@ -99,5 +100,25 @@ describe(`7 - Salve o e-mail da pessoa usuária no localStorage
     userEvent.type(inputPassword, '1234567');
     userEvent.click(submitButton);
     expect(localStorage.getItem('user')).toEqual(JSON.stringify(userEmail));
+  });
+});
+
+describe(`8 - Redirecione a pessoa usuária para a tela principal de 
+        receitas de comidas após a submissão e validação com sucesso do login`, () => {
+  it('A rota muda para a tela principal de receitas de comidas', () => {
+    const { history } = renderWithRouter(<Login />);
+
+    const submitButton = screen.getByTestId(SUBMIT_BUTTON);
+    const inputEmail = screen.getByTestId(EMAIL_INPUT);
+    const inputPassword = screen.getByTestId(PASSWORD_INPUT);
+
+    userEvent.type(inputEmail, USER_MAIL);
+    userEvent.type(inputPassword, '1234567');
+    userEvent.click(submitButton);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/foods');
+
+    // expect(screen.getByText(/foods/i)).toBeInTheDocument();
   });
 });
