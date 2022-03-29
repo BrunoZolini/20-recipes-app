@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 const EMAIL_INPUT = 'email-input';
 const PASSWORD_INPUT = 'password-input';
 const SUBMIT_BUTTON = 'login-submit-btn';
+const USER_MAIL = 'teste@teste.com';
 
 describe('2 - Crie um componente chamado `Login`', () => {
   it('Será validado se existe um `input-email`', () => {
@@ -56,7 +57,7 @@ describe('5 - Verificar se o botão está desativado ao renderizar a tela Login'
     expect(submitButton).toBeDisabled();
     userEvent.type(inputEmail, 'teste@teste');
     expect(submitButton).toBeDisabled();
-    userEvent.type(inputEmail, 'teste@teste.com');
+    userEvent.type(inputEmail, USER_MAIL);
     userEvent.type(inputPassword, '1234567');
     expect(submitButton).not.toBeDisabled();
   });
@@ -75,11 +76,28 @@ describe(`6 - Salve 2 tokens no localStorage após a submissão, identificados p
     expect(submitButton).toBeDisabled();
     userEvent.type(inputEmail, 'teste@teste');
     expect(submitButton).toBeDisabled();
-    userEvent.type(inputEmail, 'teste@teste.com');
+    userEvent.type(inputEmail, USER_MAIL);
     userEvent.type(inputPassword, '1234567');
     expect(submitButton).not.toBeDisabled();
     userEvent.click(submitButton);
     expect(localStorage.getItem('mealsToken')).toEqual('1');
     expect(localStorage.getItem('cocktailsToken')).toEqual('1');
+  });
+});
+
+describe(`7 - Salve o e-mail da pessoa usuária no localStorage 
+      na chave user após a submissão`, () => {
+  it('Após a submissão a chave user deve estar salva em localStorage', () => {
+    render(<Login />);
+
+    const submitButton = screen.getByTestId(SUBMIT_BUTTON);
+    const inputEmail = screen.getByTestId(EMAIL_INPUT);
+    const inputPassword = screen.getByTestId(PASSWORD_INPUT);
+    const userEmail = { email: USER_MAIL };
+
+    userEvent.type(inputEmail, USER_MAIL);
+    userEvent.type(inputPassword, '1234567');
+    userEvent.click(submitButton);
+    expect(localStorage.getItem('user')).toEqual(JSON.stringify(userEmail));
   });
 });

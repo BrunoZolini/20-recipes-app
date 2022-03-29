@@ -18,6 +18,8 @@ export default function Login() {
   const handleClick = () => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
+    const userEmail = { email };
+    localStorage.setItem('user', JSON.stringify(userEmail));
   };
 
   return (
