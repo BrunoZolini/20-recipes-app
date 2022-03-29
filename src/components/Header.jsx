@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 export default function Header({ title, profile, search }) {
+  const [isDisabled, setIsDisabled] = useState(false);
   const history = useHistory();
   return (
     <div>
@@ -28,6 +29,7 @@ export default function Header({ title, profile, search }) {
       {search && (
         <button
           type="button"
+          onClick={ () => setIsDisabled(!isDisabled) }
         >
           <img
             data-testid="search-top-btn"
@@ -35,6 +37,11 @@ export default function Header({ title, profile, search }) {
             src={ searchIcon }
           />
         </button>
+      )}
+      {isDisabled && (
+        <div>
+          <input type="text" data-testid="search-input" />
+        </div>
       )}
     </div>
   );

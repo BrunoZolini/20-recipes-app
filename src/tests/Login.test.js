@@ -118,7 +118,5 @@ describe(`8 - Redirecione a pessoa usuária para a tela principal de
 
     const { pathname } = history.location;
     expect(pathname).toBe('/foods');
-
-    // expect(screen.getByText(/foods/i)).toBeInTheDocument();
   });
 });
