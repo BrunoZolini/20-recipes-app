@@ -2,7 +2,9 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 // import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../service/renderWithRouter';
-import Header from '../components/Header';
+// import Header from '../components/Header';
+import Login from '../pages/Login';
+import Foods from '../pages/Foods';
 
 const BUTTON_PROFILE = 'profile-top-btn';
 const PAGE_TITLE = 'page-title';
@@ -11,7 +13,7 @@ const SEARCH_BUTTON = 'search-top-btn';
 describe(`9 - Implemente os elementos do header na tela principal de receitas, 
   respeitando os atributos descritos no protótipo`, () => {
   it('Tem os data-testids profile-top-btn, page-title e search-top-btn', () => {
-    renderWithRouter(<Header />);
+    renderWithRouter(<Foods />);
     const buttonProfile = screen.getByTestId(BUTTON_PROFILE);
     const pageTitle = screen.getByTestId(PAGE_TITLE);
     const searchButton = screen.getByTestId(SEARCH_BUTTON);
@@ -22,10 +24,18 @@ describe(`9 - Implemente os elementos do header na tela principal de receitas,
   });
 });
 
-describe(`10 - Implemente um ícone para a tela de perfil, 
+describe.only(`10 - Implemente um ícone para a tela de perfil, 
   um título e um ícone para a busca, caso exista no protótipo`, () => {
   it('Não tem header na tela de login', () => {
+    renderWithRouter(<Login />);
 
+    const buttonProfile = screen.getByTestId(BUTTON_PROFILE);
+    const pageTitle = screen.getByTestId(PAGE_TITLE);
+    const searchButton = screen.getByTestId(SEARCH_BUTTON);
+
+    expect(buttonProfile).not.toBeInTheDocument();
+    expect(pageTitle).not.toBeInTheDocument();
+    expect(searchButton).not.toBeInTheDocument();
   });
 });
 

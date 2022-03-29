@@ -3,32 +3,36 @@ import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
-export default function Header({ title }) {
+export default function Header({ title, profile, search }) {
   return (
     <div>
-      <button
-        type="button"
-      >
-        <img
-          data-testid="profile-top-btn"
-          alt="profileIcon"
-          src={ profileIcon }
-        />
-      </button>
+      {profile && (
+        <button
+          type="button"
+        >
+          <img
+            data-testid="profile-top-btn"
+            alt="profileIcon"
+            src={ profileIcon }
+          />
+        </button>
+      )}
       <h3
         data-testid="page-title"
       >
         {title}
       </h3>
-      <button
-        type="button"
-      >
-        <img
-          data-testid="search-top-btn"
-          alt="searchIcon"
-          src={ searchIcon }
-        />
-      </button>
+      {search && (
+        <button
+          type="button"
+        >
+          <img
+            data-testid="search-top-btn"
+            alt="searchIcon"
+            src={ searchIcon }
+          />
+        </button>
+      )}
     </div>
   );
 }
