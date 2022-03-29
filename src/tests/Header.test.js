@@ -1,6 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../service/renderWithRouter';
 // import Header from '../components/Header';
 import Login from '../pages/Login';
@@ -226,8 +226,15 @@ describe(`10 - Implemente um ícone para a tela de perfil,
 describe(`11 - Redirecione a pessoa usuária para a tela de perfil 
   ao clicar no botão de perfil`, () => {
   it('A mudança de tela ocorre corretamente', () => {
+    const { history } = renderWithRouter(<Foods />);
 
+    const buttonProfile = screen.queryByTestId(BUTTON_PROFILE);
+    userEvent.click(buttonProfile);
+    const { pathname } = history.location;
+
+    expect(pathname).toBe('/profile');
   });
+
 });
 
 describe(`12 - Desenvolva o botão de busca que, ao ser clicado, 
