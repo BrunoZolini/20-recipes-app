@@ -15,6 +15,11 @@ export default function Login() {
     }
   }, [email, password]);
 
+  const handleClick = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+  };
+
   return (
     <div>
       <form>
@@ -34,6 +39,7 @@ export default function Login() {
           type="submit"
           data-testid="login-submit-btn"
           disabled={ isDisabled }
+          onClick={ handleClick }
         >
           Enter
         </button>

@@ -61,3 +61,25 @@ describe('5 - Verificar se o botão está desativado ao renderizar a tela Login'
     expect(submitButton).not.toBeDisabled();
   });
 });
+
+describe(`6 - Salve 2 tokens no localStorage após a submissão, identificados pelas 
+      chaves mealsToken e cocktailsToken`, () => {
+  it(`Após a submissão mealsToken e cocktailsToken 
+      devem estar salvos em localStorage`, () => {
+    render(<Login />);
+
+    const submitButton = screen.getByTestId(SUBMIT_BUTTON);
+    const inputEmail = screen.getByTestId(EMAIL_INPUT);
+    const inputPassword = screen.getByTestId(PASSWORD_INPUT);
+
+    expect(submitButton).toBeDisabled();
+    userEvent.type(inputEmail, 'teste@teste');
+    expect(submitButton).toBeDisabled();
+    userEvent.type(inputEmail, 'teste@teste.com');
+    userEvent.type(inputPassword, '1234567');
+    expect(submitButton).not.toBeDisabled();
+    userEvent.click(submitButton);
+    expect(localStorage.getItem('mealsToken')).toEqual('1');
+    expect(localStorage.getItem('cocktailsToken')).toEqual('1');
+  });
+});
