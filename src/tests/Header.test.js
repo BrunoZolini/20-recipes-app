@@ -38,7 +38,7 @@ describe(`9 - Implemente os elementos do header na tela principal de receitas,
   });
 });
 
-describe.only(`10 - Implemente um ícone para a tela de perfil, 
+describe(`10 - Implemente um ícone para a tela de perfil, 
   um título e um ícone para a busca, caso exista no protótipo`, () => {
   it('Não tem header na tela de login', () => {
     renderWithRouter(<Login />);
