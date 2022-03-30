@@ -5,11 +5,9 @@ import context from '../context/myContext';
 export default function RecipesCards({ searchType }) {
   const { searchValue } = useContext(context);
   const { data } = searchValue;
-  console.log(data);
   const maxItens = 12;
   const negative = -1;
   const strType = searchType.charAt(0).toUpperCase() + searchType.slice(1, negative);
-  console.log(strType);
 
   return (
     <div>

@@ -20,16 +20,21 @@ function SearchBar({ page }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { value, filter } = searchValue;
+
     if (filter === 'letter' && value.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
       const data = await fetchAPI(value, filter, page);
       setSearchValue({ ...searchValue, data });
-      if (page === 'Foods' && data.meals.length === 1) {
-        history.push(`/foods/${data.meals[0].idMeal}`);
-      }
-      if (page === 'Drinks' && data.drinks.length === 1) {
-        history.push(`/drinks/${data.drinks[0].idDrink}`);
+      if (data.meals === null || data.drinks === null) {
+        global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      } else {
+        if (page === 'Foods' && data.meals.length === 1) {
+          history.push(`/foods/${data.meals[0].idMeal}`);
+        }
+        if (page === 'Drinks' && data.drinks.length === 1) {
+          history.push(`/drinks/${data.drinks[0].idDrink}`);
+        }
       }
     }
   };
