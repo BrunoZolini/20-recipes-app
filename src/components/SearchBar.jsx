@@ -18,8 +18,12 @@ function SearchBar({ page }) {
 
   const handleSubmit = async () => {
     const { value, filter } = searchValue;
-    const data = await fetchAPI(value, filter, page);
-    setSearchValue({ ...searchValue, data });
+    if (filter === 'letter' && value.length > 1) {
+      global.alert('Your search must have only 1 (one) character');
+    } else {
+      const data = await fetchAPI(value, filter, page);
+      setSearchValue({ ...searchValue, data });
+    }
   };
 
   return (
@@ -58,7 +62,7 @@ function SearchBar({ page }) {
           <input
             name="filter"
             onChange={ handleChecked }
-            value="Letter"
+            value="letter"
             type="radio"
             data-testid="first-letter-search-radio"
           />

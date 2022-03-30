@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 // oi
 export default function Header({ title, profile, search }) {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -40,7 +41,7 @@ export default function Header({ title, profile, search }) {
       )}
       {isDisabled && (
         <div>
-          <input type="text" data-testid="search-input" />
+          <SearchBar page={ title } />
         </div>
       )}
     </div>
