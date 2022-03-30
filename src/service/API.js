@@ -14,8 +14,8 @@ async function fetchAPI(value) {
 
   const request = await fetch(getData); // fetching the data from the API
   const response = await request.json();
-  if (Object.keys(response)[0] === 'meals') return response.meals; // if the response is meals, return the meals
-  if (Object.keys(response)[0] === 'drinks') return response.drinks; // if the response is drinks, return the drinks
+  if (Object.keys(response)[0] === 'meals') return response.meals; // if the response is meals. return the meals
+  if (Object.keys(response)[0] === 'drinks') return response.drinks; // if the response is drinks. return the drinks
 }
 
 export default fetchAPI;

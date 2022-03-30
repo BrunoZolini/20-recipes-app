@@ -10,7 +10,7 @@ function SearchBar() {
   }
 
   const handleChecked = ({ target }) => {
-    if (target.checked) setSearchValue({ ...searchValue, filter: target.value }); // if checked, set filter to target.value
+    if (target.checked) setSearchValue({ ...searchValue, filter: target.value }); // if checked set filter to target.value
   };
 
   /* const handleSubmit = async () => {
