@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import MyContext from './myContext';
 
 function Provider({ children }) {
-  const INITIAL_STATE = { nome: 'Xablau', idade: 100 };
-  const [state, setState] = useState(INITIAL_STATE);
+  const [searchValue, setSearchValue] = useState({
+    value: '',
+    filter: 'ingredient',
+    data: [] });
 
   return (
-    <MyContext.Provider value={ { state, setState } }>
+    <MyContext.Provider value={ { searchValue, setSearchValue } }>
       {children}
     </MyContext.Provider>
   );
