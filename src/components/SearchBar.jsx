@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import fetchAPI from '../service/API';
+import context from '../context/myContext';
 
 function SearchBar({ page }) {
-  const [searchValue, setSearchValue] = useState({
-    value: '',
-    filter: 'ingredient',
-    data: [] });
+  const history = useHistory();
+
+  const { searchValue, setSearchValue } = useContext(context);
 
   function handleChange({ target }) {
     setSearchValue({ ...searchValue, value: target.value });
@@ -16,18 +17,25 @@ function SearchBar({ page }) {
     if (target.checked) setSearchValue({ ...searchValue, filter: target.value }); // if checked, set filter to target.value
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const { value, filter } = searchValue;
     if (filter === 'letter' && value.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
       const data = await fetchAPI(value, filter, page);
       setSearchValue({ ...searchValue, data });
+      if (page === 'Foods' && data.meals.length === 1) {
+        history.push(`/foods/${data.meals[0].idMeal}`);
+      }
+      if (page === 'Drinks' && data.drinks.length === 1) {
+        history.push(`/drinks/${data.drinks[0].idDrink}`);
+      }
     }
   };
 
   return (
-    <div>
+    <form>
       <input
         data-testid="search-input"
         type="text"
@@ -67,11 +75,11 @@ function SearchBar({ page }) {
             data-testid="first-letter-search-radio"
           />
         </label>
-        <button type="button" data-testid="exec-search-btn" onClick={ handleSubmit }>
+        <button type="submit" data-testid="exec-search-btn" onClick={ handleSubmit }>
           Search
         </button>
       </div>
-    </div>
+    </form>
   );
 }
 
