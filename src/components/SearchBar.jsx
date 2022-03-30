@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
-// import fetchAPI from '../service/API';
+import PropTypes from 'prop-types';
+import fetchAPI from '../service/API';
 
-function SearchBar() {
-  const [searchValue, setSearchValue] = useState({ value: '', filter: '', data: [] });
+function SearchBar({ page }) {
+  const [searchValue, setSearchValue] = useState({
+    value: '',
+    filter: 'ingredient',
+    data: [] });
 
   function handleChange({ target }) {
     setSearchValue({ ...searchValue, value: target.value });
   }
 
   const handleChecked = ({ target }) => {
-    if (target.checked) setSearchValue({ ...searchValue, filter: target.value }); // if checked set filter to target.value
+    if (target.checked) setSearchValue({ ...searchValue, filter: target.value }); // if checked, set filter to target.value
   };
 
-  /* const handleSubmit = async () => {
-    const { page } = props;
-    console.log(page);
+  const handleSubmit = async () => {
     const { value, filter } = searchValue;
-    const data = await fetchAPI(value, filter);
+    const data = await fetchAPI(value, filter, page);
     setSearchValue({ ...searchValue, data });
-  }; */
+  };
 
   return (
     <div>
@@ -34,6 +35,7 @@ function SearchBar() {
         <label htmlFor="ingredient">
           Ingredient
           <input
+            defaultChecked
             name="filter"
             onChange={ handleChecked }
             value="ingredient"
@@ -69,7 +71,7 @@ function SearchBar() {
   );
 }
 
-/* SearchBar.propTypes = {
+SearchBar.propTypes = {
   page: PropTypes.string.isRequired,
-}; */
+};
 export default SearchBar;
