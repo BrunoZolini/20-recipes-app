@@ -5,6 +5,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
@@ -16,7 +17,6 @@ export default function Login() {
     }
   }, [email, password]);
 
-  const history = useHistory();
   const handleClick = (e) => {
     e.preventDefault();
     localStorage.setItem('mealsToken', 1);
