@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import RecipesCards from '../components/RecipesCards';
 import fetchAPI from '../service/API';
 import context from '../context/myContext';
+import Footer from '../components/Footer';
 
 export default function Drinks() {
   const { searchValue, setSearchValue } = useContext(context);
@@ -19,6 +20,7 @@ export default function Drinks() {
     <div>
       <Header title="Drinks" search profile />
       <RecipesCards searchType="drinks" />
+      <Footer />
     </div>
   );
 }

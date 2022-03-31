@@ -1,4 +1,6 @@
 import React, { useEffect, useContext } from 'react';
+import React from 'react';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipesCards from '../components/RecipesCards';
 import fetchAPI from '../service/API';
@@ -19,6 +21,7 @@ export default function Foods() {
     <div>
       <Header title="Foods" search profile />
       <RecipesCards searchType="meals" />
+      <Footer />
     </div>
   );
 }
