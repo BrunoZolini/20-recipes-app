@@ -10,17 +10,23 @@ export default function Foods() {
 
   useEffect(() => {
     const requestAPI = async () => {
-      const data = await fetchAPI('', 'name', 'Foods');
+      const data = await fetchAPI('', 'default', 'Foods');
       setSearchValue({ ...searchValue, data });
     };
     requestAPI();
   }, []);
 
+  const { data } = searchValue;
+
   return (
     <div>
-      <Header title="Foods" search profile />
-      <RecipesCards searchType="meals" />
-      <Footer />
+      {data.meals && (
+        <>
+          <Header title="Foods" search profile />
+          <RecipesCards searchType="meals" strType="Meal" />
+          <Footer />
+        </>
+      )}
     </div>
   );
 }

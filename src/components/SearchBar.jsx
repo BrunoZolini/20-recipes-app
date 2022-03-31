@@ -17,6 +17,16 @@ function SearchBar({ page }) {
     if (target.checked) setSearchValue({ ...searchValue, filter: target.value }); // if checked, set filter to target.value
   };
 
+  const pageTests = (data, pageType, type, id) => {
+    console.log('type', data.type);
+    if (!data[type].length) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+    if (data[type].length === 1) {
+      history.push(`/${pageType}/${data[type][0][id]}`);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { value, filter } = searchValue;
@@ -26,15 +36,10 @@ function SearchBar({ page }) {
     } else {
       const data = await fetchAPI(value, filter, page);
       setSearchValue({ ...searchValue, data });
-      if (data.meals === null || data.drinks === null) {
-        global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      if (page === 'Foods') {
+        pageTests(data, 'foods', 'meals', 'idMeal');
       } else {
-        if (page === 'Foods' && data.meals.length === 1) {
-          history.push(`/foods/${data.meals[0].idMeal}`);
-        }
-        if (page === 'Drinks' && data.drinks.length === 1) {
-          history.push(`/drinks/${data.drinks[0].idDrink}`);
-        }
+        pageTests(data, 'drinks', 'drinks', 'idDrink');
       }
     }
   };
