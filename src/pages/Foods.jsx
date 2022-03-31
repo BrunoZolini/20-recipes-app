@@ -1,8 +1,9 @@
 import React, { useEffect, useContext } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import CategoriesList from '../components/CategoriesList';
 import RecipesCards from '../components/RecipesCards';
-import fetchAPI from '../service/API';
+import { fetchAPI } from '../service/API';
 import context from '../context/myContext';
 
 export default function Foods() {
@@ -23,6 +24,7 @@ export default function Foods() {
       {data.meals && (
         <>
           <Header title="Foods" search profile />
+          <CategoriesList page="Foods" type="meals" />
           <RecipesCards searchType="meals" strType="Meal" />
           <Footer />
         </>

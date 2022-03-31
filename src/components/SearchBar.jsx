@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import fetchAPI from '../service/API';
+import { fetchAPI } from '../service/API';
 import context from '../context/myContext';
 
 function SearchBar({ page }) {
@@ -18,7 +18,6 @@ function SearchBar({ page }) {
   };
 
   const pageTests = (data, pageType, type, id) => {
-    console.log('type', data.type);
     if (!data[type].length) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
