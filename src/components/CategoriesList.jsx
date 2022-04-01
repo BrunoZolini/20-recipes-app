@@ -5,6 +5,8 @@ import context from '../context/myContext';
 
 export default function CategoriesList({ page, type }) {
   const [categories, setCategories] = useState([]);
+  const [isChecked, setIsChecked] = useState([false, false, false, false, false]);
+
   const { searchValue, setSearchValue } = useContext(context);
   const maxItens = 5;
 
@@ -16,42 +18,42 @@ export default function CategoriesList({ page, type }) {
     requestAPI();
   }, []);
 
-  const handleCategoryButton = async (category) => {
-    const data = await fetchAPI(category, 'category', page);
-    setSearchValue({ ...searchValue, data });
-  };
-
-  const handleCheckBox = async ({ target }) => {
-    if (target.checked) {
+  const handleCategoryButton = async (bool, index, value) => {
+    if (!bool) {
+      const data = await fetchAPI(value, 'category', page);
+      setSearchValue({ ...searchValue, data });
+      setIsChecked(isChecked.map((item, i) => (i === index ? !item : false)));
+    } else {
       const data = await fetchAPI('', 'default', page);
       setSearchValue({ ...searchValue, data });
+      setIsChecked(isChecked.map((item, i) => (i === index ? !item : false)));
     }
   };
 
   return (
-    <div>
-      {categories[type]
+    <form>
+      <label htmlFor="filterCheckbox">
+        {categories[type]
       && categories[type].filter((_item, index) => index < maxItens)
         .map(({ strCategory }, index) => (
           <div key={ index }>
-            <button
-              data-testid={ `${strCategory}-category-filter` }
-              type="button"
-              onClick={ () => handleCategoryButton(strCategory) }
-            >
+            <label htmlFor={ strCategory }>
+              <input
+                data-testid={ `${strCategory}-category-filter` }
+                id={ strCategory }
+                name="filterCheckbox"
+                type="checkbox"
+                checked={ isChecked[index] }
+                onChange={ () => handleCategoryButton(
+                  isChecked[index], index, strCategory,
+                ) }
+              />
               {strCategory}
-            </button>
+            </label>
           </div>
         ))}
-      <label htmlFor="toggle">
-        <input
-          id="toggle"
-          type="checkbox"
-          onChange={ handleCheckBox }
-        />
-        {page}
       </label>
-    </div>
+    </form>
   );
 }
 
