@@ -25,7 +25,7 @@ export default function Drinks() {
         <>
           <Header title="Drinks" search profile />
           <CategoriesList page="Drinks" type="drinks" />
-          <RecipesCards searchType="drinks" strType="Drink" />
+          <RecipesCards searchType="drinks" strType="Drink" page="drinks" />
           <Footer />
         </>
       )}

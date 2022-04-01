@@ -5,7 +5,7 @@ import context from '../context/myContext';
 
 export default function CategoriesList({ page, type }) {
   const [categories, setCategories] = useState([]);
-  const [isChecked, setIsChecked] = useState([false, false, false, false, false]);
+  const [isChecked, setIsChecked] = useState([false, false, false, false, false, false]);
 
   const { searchValue, setSearchValue } = useContext(context);
   const maxItens = 5;
@@ -32,8 +32,21 @@ export default function CategoriesList({ page, type }) {
 
   return (
     <form>
-      <label htmlFor="filterCheckbox">
-        {categories[type]
+      <label htmlFor="All">
+        <input
+          data-testid="All-category-filter"
+          id="All"
+          name="filterCheckbox"
+          type="checkbox"
+          checked={ isChecked[0] }
+          onChange={ () => handleCategoryButton(
+            true, 0, '',
+          ) }
+        />
+        All
+      </label>
+
+      {categories[type]
       && categories[type].filter((_item, index) => index < maxItens)
         .map(({ strCategory }, index) => (
           <div key={ index }>
@@ -43,16 +56,15 @@ export default function CategoriesList({ page, type }) {
                 id={ strCategory }
                 name="filterCheckbox"
                 type="checkbox"
-                checked={ isChecked[index] }
+                checked={ isChecked[index + 1] }
                 onChange={ () => handleCategoryButton(
-                  isChecked[index], index, strCategory,
+                  isChecked[index + 1], index + 1, strCategory,
                 ) }
               />
               {strCategory}
             </label>
           </div>
         ))}
-      </label>
     </form>
   );
 }
