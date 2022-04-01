@@ -13,7 +13,7 @@ export default function FoodsDetails() {
 
   return (
     <div>
-      <RecipesDetails withVideo />
+      <RecipesDetails withVideo page="foods" id />
     </div>
   );
 }

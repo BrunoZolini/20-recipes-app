@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-export default function RecipesDetails({ withVideo }) {
+export default function RecipesDetails({ withVideo, id, page }) {
   const [favorite, setFavorite] = useState(false);
+  const history = useHistory();
   return (
     <div>
       <img data-testid="recipe-photo" src="" alt="" />
@@ -39,8 +41,12 @@ export default function RecipesDetails({ withVideo }) {
       <p data-testid="instructions">instructions</p>
       {withVideo && <p data-testid="video">video</p>}
       <p data-testid="0-recomendation-card">recomendation</p>
-      <button type="button" data-testid="start-recipe-btn">
-        iniciar receita
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        onClick={ () => { history.push(`/${page}/${id}/in-progress`); } }
+      >
+        Start Recipe
       </button>
     </div>
   );
@@ -48,4 +54,6 @@ export default function RecipesDetails({ withVideo }) {
 
 RecipesDetails.propTypes = {
   withVideo: PropTypes.bool.isRequired,
+  id: PropTypes.string.isRequired,
+  page: PropTypes.string.isRequired,
 };

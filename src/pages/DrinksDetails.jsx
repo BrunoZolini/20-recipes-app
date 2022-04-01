@@ -4,7 +4,7 @@ import RecipesDetails from '../components/RecipesDetails';
 export default function DrinksDetails() {
   return (
     <div>
-      <RecipesDetails withVideo={ false } />
+      <RecipesDetails withVideo={ false } page="drinks" id />
     </div>
   );
 }
