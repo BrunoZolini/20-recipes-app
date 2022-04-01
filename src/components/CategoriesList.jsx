@@ -21,6 +21,13 @@ export default function CategoriesList({ page, type }) {
     setSearchValue({ ...searchValue, data });
   };
 
+  const handleCheckBox = async ({ target }) => {
+    if (target.checked) {
+      const data = await fetchAPI('', 'default', page);
+      setSearchValue({ ...searchValue, data });
+    }
+  };
+
   return (
     <div>
       {categories[type]
@@ -36,6 +43,14 @@ export default function CategoriesList({ page, type }) {
             </button>
           </div>
         ))}
+      <label htmlFor="toggle">
+        <input
+          id="toggle"
+          type="checkbox"
+          onChange={ handleCheckBox }
+        />
+        {page}
+      </label>
     </div>
   );
 }
