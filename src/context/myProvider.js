@@ -7,9 +7,26 @@ function Provider({ children }) {
     value: '',
     filter: 'ingredient',
     data: [] });
+  const [favorite, setFavorite] = useState(false);
+  const [recipe, setRecipe] = useState(null);
+  const [ingredient, setIngredient] = useState([]);
+  const [measure, setMeasure] = useState([]);
+
+  const state = {
+    searchValue,
+    setSearchValue,
+    favorite,
+    setFavorite,
+    ingredient,
+    setIngredient,
+    recipe,
+    setRecipe,
+    measure,
+    setMeasure,
+  };
 
   return (
-    <MyContext.Provider value={ { searchValue, setSearchValue } }>
+    <MyContext.Provider value={ state }>
       {children}
     </MyContext.Provider>
   );

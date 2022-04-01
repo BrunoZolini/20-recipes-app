@@ -1,21 +1,42 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RecipesDetails from '../components/RecipesDetails';
+import context from '../context/myContext';
+import { fetchAPI } from '../service/API';
 
 export default function DrinksDetails({
   match: {
     params: { id },
   },
 }) {
+  const { recipe, setRecipe } = useContext(context);
+  const { setIngredient } = useContext(context);
+  const { setMeasure } = useContext(context);
+
+  useEffect(() => {
+    async function getData() {
+      const response = await fetchAPI(id, 'id', 'Drinks');
+      setRecipe(Object.values(response)[0][0]);
+      console.log(Object.values(response)[0][0]);
+
+      const arrKeys = Object.keys(Object.values(response)[0][0]);
+      const ingredients = arrKeys.filter((key) => key.includes('strIngredient'));
+      setIngredient(ingredients);
+      const measures = arrKeys.filter((key) => key.includes('strMeasure'));
+      setMeasure(measures);
+    }
+    getData();
+  }, []);
+
   return (
     <div>
-      <RecipesDetails
+      { recipe !== null && <RecipesDetails
         withVideo={ false }
         page="drinks"
         id={ id }
-        recipeType="Drinks"
+        // recipeType="Drinks"
         strType="Drink"
-      />
+      />}
     </div>
   );
 }
