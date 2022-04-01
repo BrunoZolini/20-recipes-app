@@ -4,6 +4,7 @@ export async function fetchAPI(value, filters, page) {
       ingredient: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${value}`,
       name: `https://www.themealdb.com/api/json/v1/1/search.php?s=${value}`,
       letter: `https://www.themealdb.com/api/json/v1/1/search.php?f=${value}`,
+      category: `https://www.themealdb.com/api/json/v1/1/filter.php?c=${value}`,
       default: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
     },
 
@@ -11,6 +12,7 @@ export async function fetchAPI(value, filters, page) {
       ingredient: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${value}`,
       name: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${value}`,
       letter: `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${value}`,
+      category: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${value}`,
       default: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
     },
   };

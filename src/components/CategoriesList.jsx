@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { fetchCategoriesAPI } from '../service/API';
+import { fetchAPI, fetchCategoriesAPI } from '../service/API';
+import context from '../context/myContext';
 
 export default function CategoriesList({ page, type }) {
   const [categories, setCategories] = useState([]);
+  const { searchValue, setSearchValue } = useContext(context);
+  const maxItens = 5;
 
   useEffect(() => {
     const requestAPI = async () => {
@@ -12,7 +15,11 @@ export default function CategoriesList({ page, type }) {
     };
     requestAPI();
   }, []);
-  const maxItens = 5;
+
+  const handleCategoryButton = async (category) => {
+    const data = await fetchAPI(category, 'category', page);
+    setSearchValue({ ...searchValue, data });
+  };
 
   return (
     <div>
@@ -23,6 +30,7 @@ export default function CategoriesList({ page, type }) {
             <button
               data-testid={ `${strCategory}-category-filter` }
               type="button"
+              onClick={ () => handleCategoryButton(strCategory) }
             >
               {strCategory}
             </button>
