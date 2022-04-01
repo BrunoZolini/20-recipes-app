@@ -37,7 +37,7 @@ export default function RecipesDetails({ withVideo, id, page }) {
         </button>
       </div>
       <p data-testid="recipe-category">text</p>
-      <p data-testid="0-ingredient-name-and-measure"> </p>
+      <p data-testid={ `${index}-ingredient-name-and-measure` }> </p>
       <p data-testid="instructions">instructions</p>
       {withVideo && <p data-testid="video">video</p>}
       <p data-testid="0-recomendation-card">recomendation</p>
