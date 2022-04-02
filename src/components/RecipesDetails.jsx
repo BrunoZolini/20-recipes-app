@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchAPI } from '../service/API';
 import context from '../context/myContext';
@@ -8,6 +7,8 @@ import HeadOfRecipesDetails from './HeadOfRecipesDetails';
 import VideoOfRecipesDetails from './VideoOfRecipesDetails';
 import IngredientsListOfRecipesDetails from './IngredientsListOfRecipesDetails';
 import RecommendedOfRecipesDetails from './RecommendedOfRecipesDetails';
+import InstructionsOfRecipesDetails from './InstructionsOfRecipesDetails';
+import ButtonOfRecipesDetails from './ButtonOfRecipesDetails';
 
 export default function RecipesDetails({
   withVideo,
@@ -21,8 +22,6 @@ export default function RecipesDetails({
   reverseSearch,
   reversePage,
 }) {
-  const history = useHistory();
-  // const [favorite, setFavorite] = useState(false);
   const [recipe, setRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
@@ -61,7 +60,9 @@ export default function RecipesDetails({
             measure={ measure }
           />
 
-          <p data-testid="instructions">{recipe.strInstructions}</p>
+          <InstructionsOfRecipesDetails
+            instructions={ recipe.strInstructions }
+          />
 
           {withVideo && (
             <VideoOfRecipesDetails videoUrl={ recipe.strYoutube } />
@@ -73,16 +74,10 @@ export default function RecipesDetails({
             reversePage={ reversePage }
           />
 
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            className="startRecipe"
-            onClick={ () => {
-              history.push(`/${page}/${id}/in-progress`);
-            } }
-          >
-            Start Recipe
-          </button>
+          <ButtonOfRecipesDetails
+            page={ page }
+            id={ id }
+          />
         </div>
       )}
     </div>
