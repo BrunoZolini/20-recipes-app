@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
 import { fetchAPI } from '../service/API';
 import context from '../context/myContext';
 import '../styles/RecipesDetails.css';
 import RecipesCards from './RecipesCards';
+import HeadOfRecipesDetails from './HeadOfRecipesDetails';
 
 export default function RecipesDetails({
   withVideo,
@@ -22,7 +20,7 @@ export default function RecipesDetails({
   reversePage,
 }) {
   const history = useHistory();
-  const [favorite, setFavorite] = useState(false);
+  // const [favorite, setFavorite] = useState(false);
   const [recipe, setRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
@@ -57,32 +55,12 @@ export default function RecipesDetails({
     <div>
       {screen && (
         <div>
-          <img
-            data-testid="recipe-photo"
-            src={ recipe[`str${strType}Thumb`] }
-            alt=""
+          <HeadOfRecipesDetails
+            thumb={ recipe[`str${strType}Thumb`] }
+            title={ recipe[`str${strType}`] }
+            category={ withVideo ? (recipe.strCategory) : (recipe.strAlcoholic) }
           />
-          <h1 data-testid="recipe-title">{recipe[`str${strType}`]}</h1>
-          <button type="button">
-            <img data-testid="share-btn" alt="shareIcon" src={ shareIcon } />
-          </button>
-          <div>
-            <button
-              type="button"
-              onClick={ () => {
-                setFavorite(!favorite);
-              } }
-            >
-              <img
-                data-testid="favorite-btn"
-                alt="favorite-btn"
-                src={ favorite ? blackHeartIcon : whiteHeartIcon }
-              />
-            </button>
-          </div>
-          <p data-testid="recipe-category">
-            { withVideo ? (recipe.strCategory) : (recipe.strAlcoholic)}
-          </p>
+
           {ingredient.filter((value) => (recipe[value]))
             .map((item, index) => (
               <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
@@ -90,6 +68,7 @@ export default function RecipesDetails({
                   ? recipe[measure[index]] : ''}`}
               </p>
             ))}
+
           <p data-testid="instructions">{recipe.strInstructions}</p>
           {withVideo && (
             <div className="video" data-testid="video">
