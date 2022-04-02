@@ -106,14 +106,14 @@ export default function RecipesDetails({
           )}
           {measure.filter((value) => (recipe[value] !== null))
             .map((item, index) => (
-              <p key={ index } data-testid={ `${index}-recomendation-card` }>
+              <p key={ index + 1 } data-testid={ `${index}-ingredient-name-and-measure` }>
                 {recipe[item]}
               </p>
             ))}
           <button
-            id="startRecipe"
             type="button"
             data-testid="start-recipe-btn"
+            className="startRecipe"
             onClick={ () => {
               history.push(`/${page}/${id}/in-progress`);
             } }
