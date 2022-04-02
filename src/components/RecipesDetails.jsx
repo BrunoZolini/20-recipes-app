@@ -63,19 +63,11 @@ export default function RecipesDetails({
                 setFavorite(!favorite);
               } }
             >
-              {!favorite ? (
-                <img
-                  data-testid="favorite-btn"
-                  alt="whiteHeartIcon"
-                  src={ whiteHeartIcon }
-                />
-              ) : (
-                <img
-                  data-testid="favorite-btn"
-                  alt="blackHeartIcon"
-                  src={ blackHeartIcon }
-                />
-              )}
+              <img
+                data-testid="favorite-btn"
+                alt="favorite-btn"
+                src={ favorite ? blackHeartIcon : whiteHeartIcon }
+              />
             </button>
           </div>
           <p data-testid="recipe-category">
