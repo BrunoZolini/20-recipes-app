@@ -13,6 +13,7 @@ export default function RecipesCards({ searchType, strType, page }) {
       {data[searchType].filter((_item, index) => index < maxItens)
         .map((item, index) => (
           <Link
+            data-testid={ `${index}-recomendation-card` }
             key={ index }
             to={ `/${page}/${item[`id${strType}`]}` }
           >

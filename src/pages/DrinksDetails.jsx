@@ -15,6 +15,11 @@ export default function DrinksDetails({
         id={ id }
         recipeType="Drinks"
         strType="Drink"
+        searchType="drinks"
+        reverseType="Foods"
+        reverseStrType="Meal"
+        reverseSearch="meals"
+        reversePage="foods"
       />
     </div>
   );

@@ -25,6 +25,7 @@ export default function CategoriesList({ page, type }) {
       setIsChecked(isChecked.map((item, i) => (i === index ? !item : false)));
     } else {
       const data = await fetchAPI('', 'default', page);
+      console.log(data);
       setSearchValue({ ...searchValue, data });
       setIsChecked(isChecked.map((item, i) => (i === index ? !item : false)));
     }

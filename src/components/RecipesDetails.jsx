@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import { fetchAPI } from '../service/API';
+import context from '../context/myContext';
 import '../styles/RecipesDetails.css';
+import RecipesCards from './RecipesCards';
 
 export default function RecipesDetails({
   withVideo,
@@ -13,6 +15,11 @@ export default function RecipesDetails({
   page,
   recipeType,
   strType,
+  // searchType,
+  reverseType,
+  reverseStrType,
+  reverseSearch,
+  reversePage,
 }) {
   const history = useHistory();
   const [favorite, setFavorite] = useState(false);
@@ -20,11 +27,14 @@ export default function RecipesDetails({
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
   const [screen, setScreen] = useState(false);
+  const { searchValue, setSearchValue } = useContext(context);
 
   useEffect(() => {
     async function getData() {
       const response = await fetchAPI(id, 'id', recipeType);
       setRecipe(Object.values(response)[0][0]);
+      const data = await fetchAPI('', 'default', reverseType);
+      setSearchValue({ ...searchValue, data });
       const arrKeys = Object.keys(Object.values(response)[0][0]);
       const ingredients = arrKeys.filter((key) => key.includes('strIngredient'));
       setIngredient(ingredients);
@@ -73,22 +83,16 @@ export default function RecipesDetails({
           <p data-testid="recipe-category">
             { withVideo ? (recipe.strCategory) : (recipe.strAlcoholic)}
           </p>
-          {ingredient.filter((value) => (recipe[value] !== null))
+          {ingredient.filter((value) => (recipe[value]))
             .map((item, index) => (
               <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-                {recipe[item]}
+                {`${recipe[item]} - ${recipe[measure[index]] !== null
+                  ? recipe[measure[index]] : ''}`}
               </p>
             ))}
           <p data-testid="instructions">{recipe.strInstructions}</p>
           {withVideo && (
             <div className="video" data-testid="video">
-              <a
-                href={
-                  recipe.strYoutube ? recipe.strYoutube : 'Video não encontrado'
-                }
-              >
-                {recipe.strYoutube}
-              </a>
               <iframe
                 width="360"
                 height="202"
@@ -104,12 +108,13 @@ export default function RecipesDetails({
               />
             </div>
           )}
-          {measure.filter((value) => (recipe[value] !== null))
-            .map((item, index) => (
-              <p key={ index + 1 } data-testid={ `${index}-ingredient-name-and-measure` }>
-                {recipe[item]}
-              </p>
-            ))}
+          <div>
+            <RecipesCards
+              searchType={ reverseSearch }
+              strType={ reverseStrType }
+              page={ reversePage }
+            />
+          </div>
           <button
             type="button"
             data-testid="start-recipe-btn"
@@ -132,4 +137,9 @@ RecipesDetails.propTypes = {
   page: PropTypes.string.isRequired,
   recipeType: PropTypes.string.isRequired,
   strType: PropTypes.string.isRequired,
+  // searchType: PropTypes.string.isRequired,
+  reverseType: PropTypes.string.isRequired,
+  reverseStrType: PropTypes.string.isRequired,
+  reverseSearch: PropTypes.string.isRequired,
+  reversePage: PropTypes.string.isRequired,
 };
