@@ -5,6 +5,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import { fetchAPI } from '../service/API';
+import '../styles/RecipesDetails.css';
 
 export default function RecipesDetails({
   withVideo,
@@ -118,6 +119,7 @@ export default function RecipesDetails({
               </p>
             ))}
           <button
+            id="startRecipe"
             type="button"
             data-testid="start-recipe-btn"
             onClick={ () => {
