@@ -109,11 +109,16 @@ export default function RecipesDetails({
             </div>
           )}
           <div>
-            <RecipesCards
-              searchType={ reverseSearch }
-              strType={ reverseStrType }
-              page={ reversePage }
-            />
+            <h3>Recommended</h3>
+            <div className="scrollbar">
+              <RecipesCards
+                searchType={ reverseSearch }
+                strType={ reverseStrType }
+                page={ reversePage }
+                maxLength="6"
+                recomendation
+              />
+            </div>
           </div>
           <button
             type="button"
