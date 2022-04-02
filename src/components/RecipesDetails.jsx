@@ -24,8 +24,6 @@ export default function RecipesDetails({
     async function getData() {
       const response = await fetchAPI(id, 'id', recipeType);
       setRecipe(Object.values(response)[0][0]);
-      console.log(Object.values(response)[0][0]);
-
       const arrKeys = Object.keys(Object.values(response)[0][0]);
       const ingredients = arrKeys.filter((key) => key.includes('strIngredient'));
       setIngredient(ingredients);
@@ -79,9 +77,10 @@ export default function RecipesDetails({
               )}
             </button>
           </div>
-          <p data-testid="recipe-category">{recipe.strCategory}</p>
-          { !withVideo && <p>{recipe.strAlcoholic}</p>}
-          {ingredient.filter((value) => (recipe[value]))
+          <p data-testid="recipe-category">
+            { withVideo ? (recipe.strCategory) : (recipe.strAlcoholic)}
+          </p>
+          {ingredient.filter((value) => (recipe[value] !== null))
             .map((item, index) => (
               <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
                 {recipe[item]}
@@ -112,7 +111,7 @@ export default function RecipesDetails({
               />
             </div>
           )}
-          {measure.filter((value) => (recipe[value]))
+          {measure.filter((value) => (recipe[value] !== null))
             .map((item, index) => (
               <p key={ index } data-testid={ `${index}-recomendation-card` }>
                 {recipe[item]}
