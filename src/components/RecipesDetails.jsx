@@ -6,6 +6,7 @@ import context from '../context/myContext';
 import '../styles/RecipesDetails.css';
 import RecipesCards from './RecipesCards';
 import HeadOfRecipesDetails from './HeadOfRecipesDetails';
+import VideoOfRecipesDetails from './VideoOfRecipesDetails';
 
 export default function RecipesDetails({
   withVideo,
@@ -43,14 +44,6 @@ export default function RecipesDetails({
     getData();
   }, []);
 
-  const videoID = () => {
-    const url = recipe.strYoutube;
-    if (recipe.strYoutube) {
-      const video = url.match(/(?:\?v=)(.*)/);
-      return video[1];
-    }
-  };
-
   return (
     <div>
       {screen && (
@@ -70,23 +63,11 @@ export default function RecipesDetails({
             ))}
 
           <p data-testid="instructions">{recipe.strInstructions}</p>
+
           {withVideo && (
-            <div className="video" data-testid="video">
-              <iframe
-                width="360"
-                height="202"
-                src={ `https://www.youtube.com/embed/${videoID()}` }
-                title="YouTube video player"
-                frameBorder="0"
-                allow={ `accelerometer;
-            autoplay;
-            clipboard-write;
-            encrypted-media;
-            gyroscope;picture-in-picture` }
-                allowFullScreen
-              />
-            </div>
+            <VideoOfRecipesDetails videoUrl={ recipe.strYoutube } />
           )}
+
           <div>
             <h3>Recommended</h3>
             <div className="scrollbar">
@@ -99,6 +80,7 @@ export default function RecipesDetails({
               />
             </div>
           </div>
+
           <button
             type="button"
             data-testid="start-recipe-btn"
