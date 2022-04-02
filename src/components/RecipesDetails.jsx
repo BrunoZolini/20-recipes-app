@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import { fetchAPI } from '../service/API';
 import context from '../context/myContext';
 import '../styles/RecipesDetails.css';
-import RecipesCards from './RecipesCards';
 import HeadOfRecipesDetails from './HeadOfRecipesDetails';
 import VideoOfRecipesDetails from './VideoOfRecipesDetails';
+import IngredientsListOfRecipesDetails from './IngredientsListOfRecipesDetails';
+import RecommendedOfRecipesDetails from './RecommendedOfRecipesDetails';
 
 export default function RecipesDetails({
   withVideo,
@@ -54,13 +55,11 @@ export default function RecipesDetails({
             category={ withVideo ? (recipe.strCategory) : (recipe.strAlcoholic) }
           />
 
-          {ingredient.filter((value) => (recipe[value]))
-            .map((item, index) => (
-              <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-                {`${recipe[item]} - ${recipe[measure[index]] !== null
-                  ? recipe[measure[index]] : ''}`}
-              </p>
-            ))}
+          <IngredientsListOfRecipesDetails
+            recipe={ recipe }
+            ingredient={ ingredient }
+            measure={ measure }
+          />
 
           <p data-testid="instructions">{recipe.strInstructions}</p>
 
@@ -68,18 +67,11 @@ export default function RecipesDetails({
             <VideoOfRecipesDetails videoUrl={ recipe.strYoutube } />
           )}
 
-          <div>
-            <h3>Recommended</h3>
-            <div className="scrollbar">
-              <RecipesCards
-                searchType={ reverseSearch }
-                strType={ reverseStrType }
-                page={ reversePage }
-                maxLength="6"
-                recomendation
-              />
-            </div>
-          </div>
+          <RecommendedOfRecipesDetails
+            reverseSearch={ reverseSearch }
+            reverseStrType={ reverseStrType }
+            reversePage={ reversePage }
+          />
 
           <button
             type="button"
