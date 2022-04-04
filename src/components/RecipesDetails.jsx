@@ -16,29 +16,33 @@ export default function RecipesDetails({
   page,
   recipeType,
   strType,
-  // searchType,
+  searchType,
   reverseType,
   reverseStrType,
   reverseSearch,
   reversePage,
 }) {
   const [recipe, setRecipe] = useState({});
-  const [ingredient, setIngredient] = useState([]);
-  const [measure, setMeasure] = useState([]);
+  const [ingredientMeasures, setIngredientMeasures] = useState([]);
   const [screen, setScreen] = useState(false);
   const { searchValue, setSearchValue } = useContext(context);
 
   useEffect(() => {
     async function getData() {
       const response = await fetchAPI(id, 'id', recipeType);
-      setRecipe(Object.values(response)[0][0]);
+      const arrResponse = Object.values(response)[0][0];
+      setRecipe(arrResponse);
       const data = await fetchAPI('', 'default', reverseType);
       setSearchValue({ ...searchValue, data });
-      const arrKeys = Object.keys(Object.values(response)[0][0]);
-      const ingredients = arrKeys.filter((key) => key.includes('strIngredient'));
-      setIngredient(ingredients);
-      const measures = arrKeys.filter((key) => key.includes('strMeasure'));
-      setMeasure(measures);
+      const arrKeys = Object.keys(arrResponse);
+      const ingredient = arrKeys.filter((key) => key.includes('strIngredient'));
+      const measure = arrKeys.filter((key) => key.includes('strMeasure'));
+      const arrIngredientsMeasures = ingredient.filter((value) => (arrResponse[value]))
+        .map((item, index) => (
+          `${arrResponse[item]} - ${arrResponse[measure[index]] !== null
+            ? arrResponse[measure[index]] : ''}`
+        ));
+      setIngredientMeasures(arrIngredientsMeasures);
       setScreen(true);
     }
     getData();
@@ -55,9 +59,7 @@ export default function RecipesDetails({
           />
 
           <IngredientsListOfRecipesDetails
-            recipe={ recipe }
-            ingredient={ ingredient }
-            measure={ measure }
+            ingredientMeasure={ ingredientMeasures }
           />
 
           <InstructionsOfRecipesDetails
@@ -77,6 +79,8 @@ export default function RecipesDetails({
           <ButtonOfRecipesDetails
             page={ page }
             id={ id }
+            searchType={ searchType }
+            ingredientMeasure={ ingredientMeasures }
           />
         </div>
       )}
@@ -90,7 +94,7 @@ RecipesDetails.propTypes = {
   page: PropTypes.string.isRequired,
   recipeType: PropTypes.string.isRequired,
   strType: PropTypes.string.isRequired,
-  // searchType: PropTypes.string.isRequired,
+  searchType: PropTypes.string.isRequired,
   reverseType: PropTypes.string.isRequired,
   reverseStrType: PropTypes.string.isRequired,
   reverseSearch: PropTypes.string.isRequired,
