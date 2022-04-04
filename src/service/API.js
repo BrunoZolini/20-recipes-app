@@ -7,6 +7,7 @@ export async function fetchAPI(value, filters, page) {
       category: `https://www.themealdb.com/api/json/v1/1/filter.php?c=${value}`,
       default: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
       id: `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${value}`,
+      random: 'https://www.themealdb.com/api/json/v1/1/random.php',
     },
 
     Drinks: {
@@ -16,6 +17,7 @@ export async function fetchAPI(value, filters, page) {
       category: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${value}`,
       default: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
       id: `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${value}`,
+      random: 'https://www.thecocktaildb.com/api/json/v1/1/random.php',
     },
   };
   const request = await fetch(getData[page][filters]); // fetching the data from the API
