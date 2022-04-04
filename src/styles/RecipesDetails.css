@@ -1,0 +1,11 @@
+.startRecipe {
+  bottom: 0;
+  position: fixed;
+}
+
+.scrollbar {
+  height: 140px;
+  margin: 20px;
+  overflow-x: auto;
+  width: 300px;
+}

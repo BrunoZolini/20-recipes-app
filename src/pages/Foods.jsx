@@ -25,7 +25,13 @@ export default function Foods() {
         <>
           <Header title="Foods" search profile />
           <CategoriesList page="Foods" type="meals" />
-          <RecipesCards searchType="meals" strType="Meal" page="foods" />
+          <RecipesCards
+            searchType="meals"
+            strType="Meal"
+            page="foods"
+            maxLength="12"
+            recomendation={ false }
+          />
           <Footer />
         </>
       )}

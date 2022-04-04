@@ -8,8 +8,13 @@ function Provider({ children }) {
     filter: 'ingredient',
     data: [] });
 
+  const state = {
+    searchValue,
+    setSearchValue,
+  };
+
   return (
-    <MyContext.Provider value={ { searchValue, setSearchValue } }>
+    <MyContext.Provider value={ state }>
       {children}
     </MyContext.Provider>
   );
