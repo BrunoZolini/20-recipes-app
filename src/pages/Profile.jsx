@@ -8,9 +8,11 @@ export default function Profile() {
 
   useEffect(() => {
     const userStorage = localStorage.getItem('user');
-    const user = JSON.parse(userStorage);
-    setEmail(user.email);
-  });
+    if (userStorage) {
+      const user = JSON.parse(userStorage);
+      setEmail(user.email);
+    }
+  }, []);
 
   const handleClick = () => {
     localStorage.clear();
@@ -19,7 +21,7 @@ export default function Profile() {
   return (
     <div>
       <Header title="Profile" search={ false } profile />
-      <p data-testid="profile-email">{ email }</p>
+      <p data-testid="profile-email">{email}</p>
       <Link to="/done-recipes">
         <button type="button" data-testid="profile-done-btn">
           Done Recipes
@@ -31,7 +33,11 @@ export default function Profile() {
         </button>
       </Link>
       <Link to="/">
-        <button type="button" data-testid="profile-logout-btn" onClick={ handleClick }>
+        <button
+          type="button"
+          data-testid="profile-logout-btn"
+          onClick={ handleClick }
+        >
           Logout
         </button>
       </Link>
