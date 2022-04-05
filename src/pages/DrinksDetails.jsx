@@ -15,7 +15,7 @@ export default function DrinksDetails({
         id={ id }
         recipeType="Drinks"
         strType="Drink"
-        searchType="drinks"
+        searchType="cocktails"
         reverseType="Foods"
         reverseStrType="Meal"
         reverseSearch="meals"
