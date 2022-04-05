@@ -1,28 +1,42 @@
 import React from 'react';
 import PropTypes, { string } from 'prop-types';
+import '../styles/IngredientsListOfRecipesDetails.css';
 
 export default function IngredientsListOfRecipesDetails(
   { ingredientMeasure, inProgress },
 ) {
+  // const [className, setClassName] = useState('');
+
+  const addClassName = ({ target }) => {
+    const label = target.parentNode;
+    if (target.checked) {
+      label.className = 'ingredientCheckbox';
+    } else {
+      label.className = '';
+    }
+  };
+
   return (
     <div>
       {ingredientMeasure.map((item, index) => (
-        <div key={ index }>
-          {inProgress ? (
-            <label htmlFor={ `${index}` }>
-              <input
-                id={ `${index}` }
-                type="checkbox"
-                data-testid={ `${index}-ingredient-step` }
-              />
+        inProgress ? (
+          <label
+            key={ index }
+            htmlFor={ `${index}` }
+            data-testid={ `${index}-ingredient-step` }
+          >
+            <input
+              id={ `${index}` }
+              type="checkbox"
+              onChange={ addClassName }
+            />
+            {item}
+          </label>)
+          : (
+            <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
               {item}
-            </label>)
-            : (
-              <p data-testid={ `${index}-ingredient-name-and-measure` }>
-                {item}
-              </p>
-            )}
-        </div>
+            </p>
+          )
       ))}
     </div>
   );

@@ -49,8 +49,6 @@ export default function RecipesDetails({
     getData();
   }, []);
 
-  console.log(recipe);
-
   return (
     <div>
       {screen && (
