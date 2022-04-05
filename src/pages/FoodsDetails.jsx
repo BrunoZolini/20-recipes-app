@@ -10,6 +10,7 @@ export default function FoodsDetails({
   return (
     <div>
       <RecipesDetails
+        inProgress={ false }
         withVideo
         page="foods"
         id={ id }
