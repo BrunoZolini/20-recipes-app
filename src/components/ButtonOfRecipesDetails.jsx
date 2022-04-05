@@ -14,7 +14,6 @@ export default function ButtonOfRecipesDetails({
 
   useEffect(() => {
     const inProgress = getInProgressRecipes(searchType);
-    console.log('LocalStorage', inProgress);
     const inProgressIDs = Object.keys(inProgress);
     if (inProgressIDs.some((item) => item.includes(id))) {
       setButtonText('Continue Recipe');

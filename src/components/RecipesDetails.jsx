@@ -48,6 +48,8 @@ export default function RecipesDetails({
     getData();
   }, []);
 
+  console.log(recipe);
+
   return (
     <div>
       {screen && (
@@ -56,6 +58,10 @@ export default function RecipesDetails({
             thumb={ recipe[`str${strType}Thumb`] }
             title={ recipe[`str${strType}`] }
             category={ withVideo ? (recipe.strCategory) : (recipe.strAlcoholic) }
+            drinkCategory={ recipe.strCategory }
+            id={ id }
+            type={ page.substr(0, page.length - 1) }
+            nationality={ page === 'foods' ? recipe.strArea : '' }
           />
 
           <IngredientsListOfRecipesDetails
