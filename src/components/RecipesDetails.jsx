@@ -66,6 +66,8 @@ export default function RecipesDetails({
           <IngredientsListOfRecipesDetails
             ingredientMeasure={ ingredientMeasures }
             inProgress={ inProgress }
+            searchType={ searchType }
+            id={ id }
           />
 
           <InstructionsOfRecipesDetails
