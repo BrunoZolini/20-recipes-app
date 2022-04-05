@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { setInProgressRecipes, getInProgressRecipes } from '../service/localStorage';
+import context from '../context/myContext';
 
 export default function ButtonOfRecipesDetails({
   page,
@@ -12,6 +13,7 @@ export default function ButtonOfRecipesDetails({
 }) {
   const history = useHistory();
   const [buttonText, setButtonText] = useState('Start Recipe');
+  const { ingredientsChecked } = useContext(context);
 
   useEffect(() => {
     const inProgress = getInProgressRecipes(searchType);
@@ -26,6 +28,10 @@ export default function ButtonOfRecipesDetails({
     setInProgressRecipes(id, searchType, ingredientMeasure);
   };
 
+  const handleClickButtonFinish = () => {
+    history.push('/done-recipes');
+  };
+
   return (
     <div>
       { finishRecipe ? (
@@ -33,7 +39,8 @@ export default function ButtonOfRecipesDetails({
           type="button"
           data-testid="finish-recipe-btn"
           className="startRecipe"
-          onClick={ handleClickButton }
+          onClick={ handleClickButtonFinish }
+          disabled={ ingredientsChecked ? ingredientsChecked.length : true }
         >
           Finish Recipe
         </button>

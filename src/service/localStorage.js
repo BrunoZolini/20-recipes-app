@@ -24,6 +24,20 @@ export const getInProgressRecipes = (type) => {
   return {};
 };
 
+export const addIngredientOnList = (type, id, list) => {
+  const ingredientsList = JSON.parse(localStorage
+    .getItem('inProgressRecipes'));
+  if (ingredientsList) {
+    const obj = {
+      ...ingredientsList[type],
+      [id]: list,
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      { ...ingredientsList, [type]: obj },
+    ));
+  }
+};
+
 export const deleteIngredientFromList = (type, id, text) => {
   const ingredientsList = JSON.parse(localStorage
     .getItem('inProgressRecipes'));

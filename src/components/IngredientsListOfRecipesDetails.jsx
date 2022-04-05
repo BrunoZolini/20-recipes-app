@@ -1,28 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes, { string } from 'prop-types';
-import { deleteIngredientFromList, getInProgressRecipes } from '../service/localStorage';
+import {
+  deleteIngredientFromList,
+  getInProgressRecipes,
+  addIngredientOnList,
+} from '../service/localStorage';
 import '../styles/IngredientsListOfRecipesDetails.css';
+import context from '../context/myContext';
 
 export default function IngredientsListOfRecipesDetails(
   { ingredientMeasure, inProgress, searchType, id },
 ) {
-  const [ingredientsList, setIngredientsList] = useState([]);
+  const { ingredientsChecked, setIngredientsChecked } = useContext(context);
 
-  useEffect(() => {
+  const updateChecked = () => {
     const currentIngredients = getInProgressRecipes(searchType);
     if (currentIngredients) {
-      setIngredientsList(currentIngredients[id]);
+      setIngredientsChecked(currentIngredients[id]);
     }
+  };
+
+  useEffect(() => {
+    updateChecked();
   }, []);
+
   const addClassName = ({ target }) => {
     const label = target.parentNode;
     const text = label.innerText;
-    console.log(text);
     if (target.checked) {
       label.className = 'ingredientCheckbox';
       deleteIngredientFromList(searchType, id, text);
+      updateChecked();
     } else {
       label.className = '';
+      const list = ingredientMeasure.filter((item) => (
+        ingredientsChecked.includes(item) || item.includes(text)
+      ));
+      addIngredientOnList(searchType, id, list);
+      updateChecked();
     }
   };
 
@@ -34,13 +49,16 @@ export default function IngredientsListOfRecipesDetails(
             key={ index }
             htmlFor={ `${index}` }
             data-testid={ `${index}-ingredient-step` }
+            className={ ingredientsChecked
+              && !ingredientsChecked.some((igredient) => igredient.includes(item))
+              ? 'ingredientCheckbox' : '' }
           >
             <input
               id={ `${index}` }
               type="checkbox"
               onChange={ addClassName }
-              checked={ ingredientsList
-                && !ingredientsList.some((igredient) => igredient.includes(item)) }
+              checked={ ingredientsChecked
+                && !ingredientsChecked.some((igredient) => igredient.includes(item)) }
             />
             {item}
           </label>)
