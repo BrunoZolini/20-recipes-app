@@ -8,6 +8,7 @@ export default function ButtonOfRecipesDetails({
   id,
   searchType,
   ingredientMeasure,
+  finishRecipe,
 }) {
   const history = useHistory();
   const [buttonText, setButtonText] = useState('Start Recipe');
@@ -27,14 +28,25 @@ export default function ButtonOfRecipesDetails({
 
   return (
     <div>
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        className="startRecipe"
-        onClick={ handleClickButton }
-      >
-        {buttonText}
-      </button>
+      { finishRecipe ? (
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          className="startRecipe"
+          onClick={ handleClickButton }
+        >
+          Finish Recipe
+        </button>
+      ) : (
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="startRecipe"
+          onClick={ handleClickButton }
+        >
+          {buttonText}
+        </button>
+      )}
     </div>
   );
 }
@@ -42,4 +54,5 @@ export default function ButtonOfRecipesDetails({
 ButtonOfRecipesDetails.propTypes = {
   page: PropTypes.string,
   id: PropTypes.string,
+  finishRecipe: PropTypes.bool,
 }.isRequired;

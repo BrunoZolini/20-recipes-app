@@ -20,7 +20,6 @@ export default function FoodsDetails({
         reverseStrType="Drink"
         reverseSearch="drinks"
         reversePage="drinks"
-
       />
     </div>
   );

@@ -21,6 +21,7 @@ export default function RecipesDetails({
   reverseStrType,
   reverseSearch,
   reversePage,
+  inProgress,
 }) {
   const [recipe, setRecipe] = useState({});
   const [ingredientMeasures, setIngredientMeasures] = useState([]);
@@ -57,7 +58,7 @@ export default function RecipesDetails({
           <HeadOfRecipesDetails
             thumb={ recipe[`str${strType}Thumb`] }
             title={ recipe[`str${strType}`] }
-            category={ withVideo ? (recipe.strCategory) : (recipe.strAlcoholic) }
+            category={ page === 'foods' ? (recipe.strCategory) : (recipe.strAlcoholic) }
             drinkCategory={ recipe.strCategory }
             id={ id }
             type={ page.substr(0, page.length - 1) }
@@ -66,6 +67,7 @@ export default function RecipesDetails({
 
           <IngredientsListOfRecipesDetails
             ingredientMeasure={ ingredientMeasures }
+            inProgress={ inProgress }
           />
 
           <InstructionsOfRecipesDetails
@@ -76,17 +78,18 @@ export default function RecipesDetails({
             <VideoOfRecipesDetails videoUrl={ recipe.strYoutube } />
           )}
 
-          <RecommendedOfRecipesDetails
+          {!inProgress && <RecommendedOfRecipesDetails
             reverseSearch={ reverseSearch }
             reverseStrType={ reverseStrType }
             reversePage={ reversePage }
-          />
+          />}
 
           <ButtonOfRecipesDetails
             page={ page }
             id={ id }
             searchType={ searchType }
             ingredientMeasure={ ingredientMeasures }
+            finishRecipe={ inProgress }
           />
         </div>
       )}
@@ -105,4 +108,5 @@ RecipesDetails.propTypes = {
   reverseStrType: PropTypes.string.isRequired,
   reverseSearch: PropTypes.string.isRequired,
   reversePage: PropTypes.string.isRequired,
+  inProgress: PropTypes.bool.isRequired,
 };

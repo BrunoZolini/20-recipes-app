@@ -1,13 +1,28 @@
 import React from 'react';
 import PropTypes, { string } from 'prop-types';
 
-export default function IngredientsListOfRecipesDetails({ ingredientMeasure }) {
+export default function IngredientsListOfRecipesDetails(
+  { ingredientMeasure, inProgress },
+) {
   return (
     <div>
       {ingredientMeasure.map((item, index) => (
-        <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-          {item}
-        </p>
+        <div key={ index }>
+          {inProgress ? (
+            <label htmlFor={ `${index}` }>
+              <input
+                id={ `${index}` }
+                type="checkbox"
+                data-testid={ `${index}-ingredient-step` }
+              />
+              {item}
+            </label>)
+            : (
+              <p data-testid={ `${index}-ingredient-name-and-measure` }>
+                {item}
+              </p>
+            )}
+        </div>
       ))}
     </div>
   );
@@ -17,4 +32,5 @@ IngredientsListOfRecipesDetails.propTypes = {
   recipe: PropTypes.object,
   ingredient: PropTypes.arrayOf(string),
   measure: PropTypes.arrayOf(string),
+  inProgress: PropTypes.bool,
 }.isRequired;
