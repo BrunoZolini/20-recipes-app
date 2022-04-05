@@ -31,6 +31,8 @@ export default function HeadOfRecipesDetails({
     }
   }, []);
 
+  // teste
+
   const handleShareButton = () => {
     clipboardCopy(`http://localhost:3000${history.location.pathname}`);
     setIsCopied(true);
