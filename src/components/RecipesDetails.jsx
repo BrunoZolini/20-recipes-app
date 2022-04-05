@@ -59,7 +59,7 @@ export default function RecipesDetails({
             category={ page === 'foods' ? (recipe.strCategory) : (recipe.strAlcoholic) }
             drinkCategory={ recipe.strCategory }
             id={ id }
-            type={ page.substr(0, page.length - 1) }
+            type={ page }
             nationality={ page === 'foods' ? recipe.strArea : '' }
           />
 
