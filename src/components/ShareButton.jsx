@@ -1,0 +1,30 @@
+import React, { useState } from 'react';
+import clipboardCopy from 'clipboard-copy';
+import PropTypes from 'prop-types';
+import shareIcon from '../images/shareIcon.svg';
+
+export default function ShareButton({ type, id }) {
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleShareButton = () => {
+    clipboardCopy(`http://localhost:3000/${type}/${id}`);
+    setIsCopied(true);
+  };
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={ handleShareButton }
+      >
+        <img data-testid="share-btn" alt="shareIcon" src={ shareIcon } />
+      </button>
+      {isCopied && <p>Link copied!</p>}
+    </div>
+  );
+}
+
+ShareButton.propTypes = {
+  type: PropTypes.string,
+  id: PropTypes.string,
+}.isRequired;

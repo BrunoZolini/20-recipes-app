@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import clipboardCopy from 'clipboard-copy';
 import PropTypes from 'prop-types';
-import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import {
@@ -9,6 +7,7 @@ import {
   getFavoriteRecipes,
   deleteFavoriteRecipe,
 } from '../service/localStorage';
+import ShareButton from './ShareButton';
 
 export default function HeadOfRecipesDetails({
   thumb,
@@ -20,7 +19,6 @@ export default function HeadOfRecipesDetails({
   drinkCategory,
 }) {
   const [favorite, setFavorite] = useState(false);
-  const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
     const storageFavorites = getFavoriteRecipes();
@@ -28,11 +26,6 @@ export default function HeadOfRecipesDetails({
       setFavorite(true);
     }
   }, []);
-
-  const handleShareButton = () => {
-    clipboardCopy(`http://localhost:3000/${type}/${id}`);
-    setIsCopied(true);
-  };
 
   const handleFavoriteButton = () => {
     if (!favorite) {
@@ -61,7 +54,9 @@ export default function HeadOfRecipesDetails({
       />
       <h1 data-testid="recipe-title">{title}</h1>
 
-      <div>
+      <ShareButton type={ type } id={ id } />
+
+      {/* <div>
         <button
           type="button"
           onClick={ handleShareButton }
@@ -69,7 +64,7 @@ export default function HeadOfRecipesDetails({
           <img data-testid="share-btn" alt="shareIcon" src={ shareIcon } />
         </button>
         {isCopied && <p>Link copied!</p>}
-      </div>
+      </div> */}
 
       <div>
         <button
