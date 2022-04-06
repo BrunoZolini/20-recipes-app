@@ -19,15 +19,10 @@ export default function IngredientsListOfRecipesDetails({
 
   const updateChecked = () => {
     const currentIngredients = getInProgressRecipes(searchType);
-    if (currentIngredients) {
-      setIngredientsChecked(currentIngredients[id]);
-    } else {
+    if (!currentIngredients) {
       setInProgressRecipes(id, searchType, ingredientMeasure);
-      const currIngredients = getInProgressRecipes(searchType);
-      if (currIngredients) {
-        setIngredientsChecked(currentIngredients[id]);
-      }
     }
+    setIngredientsChecked(getInProgressRecipes(searchType)[id]);
   };
 
   useEffect(() => {
@@ -70,7 +65,7 @@ export default function IngredientsListOfRecipesDetails({
             id={ `${index}` }
             type="checkbox"
             onChange={ addClassName }
-            defaultChecked={
+            checked={
               ingredientsChecked
                 && !ingredientsChecked.some((ingredient) => ingredient.includes(item))
             }
