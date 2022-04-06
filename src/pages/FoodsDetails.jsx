@@ -10,6 +10,7 @@ export default function FoodsDetails({
   return (
     <div>
       <RecipesDetails
+        inProgress={ false }
         withVideo
         page="foods"
         id={ id }
@@ -20,7 +21,6 @@ export default function FoodsDetails({
         reverseStrType="Drink"
         reverseSearch="drinks"
         reversePage="drinks"
-
       />
     </div>
   );

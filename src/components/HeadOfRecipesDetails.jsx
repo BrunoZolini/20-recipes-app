@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import clipboardCopy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
@@ -20,7 +19,6 @@ export default function HeadOfRecipesDetails({
   nationality,
   drinkCategory,
 }) {
-  const history = useHistory();
   const [favorite, setFavorite] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
 
@@ -31,10 +29,8 @@ export default function HeadOfRecipesDetails({
     }
   }, []);
 
-  // teste
-
   const handleShareButton = () => {
-    clipboardCopy(`http://localhost:3000${history.location.pathname}`);
+    clipboardCopy(`http://localhost:3000/${type}/${id}`);
     setIsCopied(true);
   };
 
@@ -42,10 +38,10 @@ export default function HeadOfRecipesDetails({
     if (!favorite) {
       const recipe = {
         id,
-        type,
+        type: type.substr(0, type.length - 1),
         nationality,
-        category: type === 'food' ? category : drinkCategory,
-        alcoholicOrNot: type === 'drink' ? category : '',
+        category: type === 'foods' ? category : drinkCategory,
+        alcoholicOrNot: type === 'drinks' ? category : '',
         name: title,
         image: thumb,
       };
