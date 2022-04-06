@@ -10,6 +10,7 @@ export default function DrinksDetails({
   return (
     <div>
       <RecipesDetails
+        inProgress={ false }
         withVideo={ false }
         page="drinks"
         id={ id }

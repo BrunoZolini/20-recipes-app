@@ -9,12 +9,18 @@ function Provider({ children }) {
     data: [] });
 
   const [ingredientsList, setIngredientsList] = useState([]);
+  const [ingredientsChecked, setIngredientsChecked] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const state = {
     searchValue,
     setSearchValue,
     ingredientsList,
     setIngredientsList,
+    ingredientsChecked,
+    setIngredientsChecked,
+    isDisabled,
+    setIsDisabled,
   };
 
   return (

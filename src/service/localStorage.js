@@ -21,7 +21,37 @@ export const getInProgressRecipes = (type) => {
   if (localReturn) {
     return JSON.parse(localReturn)[type];
   }
-  return {};
+  return false;
+};
+
+export const addIngredientOnList = (type, id, list) => {
+  const ingredientsList = JSON.parse(localStorage
+    .getItem('inProgressRecipes'));
+  if (ingredientsList) {
+    const obj = {
+      ...ingredientsList[type],
+      [id]: list,
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      { ...ingredientsList, [type]: obj },
+    ));
+  }
+};
+
+export const deleteIngredientFromList = (type, id, text) => {
+  const ingredientsList = JSON.parse(localStorage
+    .getItem('inProgressRecipes'));
+  if (ingredientsList) {
+    const newIngredientsList = ingredientsList[type][id]
+      .filter((item) => !item.includes(text));
+    const obj = {
+      ...ingredientsList[type],
+      [id]: newIngredientsList,
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      { ...ingredientsList, [type]: obj },
+    ));
+  }
 };
 
 export const setFavoriteRecipes = (obj) => {
