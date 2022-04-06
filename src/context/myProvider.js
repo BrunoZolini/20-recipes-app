@@ -10,6 +10,7 @@ function Provider({ children }) {
 
   const [ingredientsList, setIngredientsList] = useState([]);
   const [ingredientsChecked, setIngredientsChecked] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const state = {
     searchValue,
@@ -18,6 +19,8 @@ function Provider({ children }) {
     setIngredientsList,
     ingredientsChecked,
     setIngredientsChecked,
+    isDisabled,
+    setIsDisabled,
   };
 
   return (

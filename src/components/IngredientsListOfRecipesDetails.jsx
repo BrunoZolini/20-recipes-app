@@ -4,23 +4,34 @@ import {
   deleteIngredientFromList,
   getInProgressRecipes,
   addIngredientOnList,
+  setInProgressRecipes,
 } from '../service/localStorage';
 import '../styles/IngredientsListOfRecipesDetails.css';
 import context from '../context/myContext';
 
-export default function IngredientsListOfRecipesDetails(
-  { ingredientMeasure, inProgress, searchType, id },
-) {
+export default function IngredientsListOfRecipesDetails({
+  ingredientMeasure,
+  inProgress,
+  searchType,
+  id,
+}) {
   const { ingredientsChecked, setIngredientsChecked } = useContext(context);
 
   const updateChecked = () => {
     const currentIngredients = getInProgressRecipes(searchType);
     if (currentIngredients) {
       setIngredientsChecked(currentIngredients[id]);
+    } else {
+      setInProgressRecipes(id, searchType, ingredientMeasure);
+      const currIngredients = getInProgressRecipes(searchType);
+      if (currIngredients) {
+        setIngredientsChecked(currentIngredients[id]);
+      }
     }
   };
 
   useEffect(() => {
+    // setInProgressRecipes(id, searchType, ingredientMeasure);
     updateChecked();
   }, []);
 
@@ -33,9 +44,9 @@ export default function IngredientsListOfRecipesDetails(
       updateChecked();
     } else {
       label.className = '';
-      const list = ingredientMeasure.filter((item) => (
-        ingredientsChecked.includes(item) || item.includes(text)
-      ));
+      const list = ingredientMeasure.filter(
+        (item) => ingredientsChecked.includes(item) || item.includes(text),
+      );
       addIngredientOnList(searchType, id, list);
       updateChecked();
     }
@@ -43,31 +54,34 @@ export default function IngredientsListOfRecipesDetails(
 
   return (
     <div>
-      {ingredientMeasure.map((item, index) => (
-        inProgress ? (
-          <label
-            key={ index }
-            htmlFor={ `${index}` }
-            data-testid={ `${index}-ingredient-step` }
-            className={ ingredientsChecked
-              && !ingredientsChecked.some((igredient) => igredient.includes(item))
-              ? 'ingredientCheckbox' : '' }
-          >
-            <input
-              id={ `${index}` }
-              type="checkbox"
-              onChange={ addClassName }
-              checked={ ingredientsChecked
-                && !ingredientsChecked.some((igredient) => igredient.includes(item)) }
-            />
-            {item}
-          </label>)
-          : (
-            <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-              {item}
-            </p>
-          )
-      ))}
+      {ingredientMeasure.map((item, index) => (inProgress ? (
+        <label
+          key={ index }
+          htmlFor={ `${index}` }
+          data-testid={ `${index}-ingredient-step` }
+          className={
+            ingredientsChecked
+              && !ingredientsChecked.some((ingredient) => ingredient.includes(item))
+              ? 'ingredientCheckbox'
+              : ''
+          }
+        >
+          <input
+            id={ `${index}` }
+            type="checkbox"
+            onChange={ addClassName }
+            defaultChecked={
+              ingredientsChecked
+                && !ingredientsChecked.some((ingredient) => ingredient.includes(item))
+            }
+          />
+          {item}
+        </label>
+      ) : (
+        <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
+          {item}
+        </p>
+      )))}
     </div>
   );
 }

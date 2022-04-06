@@ -21,7 +21,6 @@ export default function ButtonOfRecipesDetails({
     if (inProgressIDs.some((item) => item.includes(id))) {
       setButtonText('Continue Recipe');
     }
-    console.log(ingredientsChecked);
   }, []);
 
   const handleClickButton = () => {

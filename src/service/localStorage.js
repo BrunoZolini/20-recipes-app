@@ -21,7 +21,7 @@ export const getInProgressRecipes = (type) => {
   if (localReturn) {
     return JSON.parse(localReturn)[type];
   }
-  return {};
+  return false;
 };
 
 export const addIngredientOnList = (type, id, list) => {
