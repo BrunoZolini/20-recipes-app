@@ -26,7 +26,6 @@ export default function IngredientsListOfRecipesDetails({
   };
 
   useEffect(() => {
-    // setInProgressRecipes(id, searchType, ingredientMeasure);
     updateChecked();
   }, []);
 
