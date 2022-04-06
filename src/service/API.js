@@ -20,7 +20,8 @@ export async function fetchAPI(value, filters, page) {
       random: 'https://www.thecocktaildb.com/api/json/v1/1/random.php',
     },
     Ingredients: {
-      default: 'https://www.themealdb.com/api/json/v1/1/list.php?i=list',
+      foods: 'https://www.themealdb.com/api/json/v1/1/list.php?i=list',
+      drinks: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list',
     },
   };
 

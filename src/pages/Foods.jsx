@@ -7,12 +7,17 @@ import { fetchAPI } from '../service/API';
 import context from '../context/myContext';
 
 export default function Foods() {
-  const { searchValue, setSearchValue } = useContext(context);
+  const { searchValue, setSearchValue, filterIngredient } = useContext(context);
 
   useEffect(() => {
     const requestAPI = async () => {
-      const data = await fetchAPI('', 'default', 'Foods');
-      setSearchValue({ ...searchValue, data });
+      if (filterIngredient === '') {
+        const data = await fetchAPI('', 'default', 'Foods');
+        setSearchValue({ ...searchValue, data });
+      } else {
+        const data = await fetchAPI(filterIngredient, 'ingredient', 'Foods');
+        setSearchValue({ ...searchValue, data });
+      }
     };
     requestAPI();
   }, []);

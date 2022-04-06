@@ -7,12 +7,18 @@ import context from '../context/myContext';
 import Footer from '../components/Footer';
 
 export default function Drinks() {
-  const { searchValue, setSearchValue } = useContext(context);
+  const { searchValue, setSearchValue, filterIngredient } = useContext(context);
 
   useEffect(() => {
     const requestAPI = async () => {
-      const data = await fetchAPI('', 'default', 'Drinks');
-      setSearchValue({ ...searchValue, data });
+      if (filterIngredient === '') {
+        const data = await fetchAPI('', 'default', 'Drinks');
+        setSearchValue({ ...searchValue, data });
+      } else {
+        const data = await fetchAPI(filterIngredient, 'ingredient', 'Drinks');
+        setSearchValue({ ...searchValue, data });
+      }
+      console.log(filterIngredient);
     };
     requestAPI();
   }, []);
