@@ -8,7 +8,7 @@ export async function fetchAPI(value, filters, page) {
       default: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
       id: `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${value}`,
       random: 'https://www.themealdb.com/api/json/v1/1/random.php',
-      nationality: 'https://www.themealdb.com/api/json/v1/1/list.php?a=list',
+      nationality: `https://www.themealdb.com/api/json/v1/1/filter.php?a=${value}`,
     },
 
     Drinks: {

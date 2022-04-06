@@ -18,6 +18,7 @@ import ExploreFoodsNationalities from './pages/ExploreFoodsNationalities';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -60,6 +61,8 @@ function App() {
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/done-recipes" component={ DoneRecipes } />
           <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+          <Route component={ NotFound } />
+
         </Switch>
       </BrowserRouter>
     </Provider>

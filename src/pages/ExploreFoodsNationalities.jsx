@@ -11,7 +11,7 @@ export default function ExploreFoodsNationalities() {
 
   useEffect(() => {
     const requestAPI = async () => {
-      const data = await fetchAPI('', 'nationality', 'Foods');
+      const data = await fetchAPI('', 'default', 'Foods');
       setSearchValue({ ...searchValue, data });
       const dataNationality = await fetchAPI('', 'default', 'Nationality');
       setFilterNationality(dataNationality.meals);
@@ -20,9 +20,13 @@ export default function ExploreFoodsNationalities() {
   }, []);
 
   const handleChange = async ({ target }) => {
-    console.log(target.value);
-    const data = await fetchAPI(target.value, 'nationality', 'Foods');
-    setSearchValue({ ...searchValue, data });
+    if (target.value === 'All') {
+      const data = await fetchAPI('', 'default', 'Foods');
+      setSearchValue({ ...searchValue, data });
+    } else {
+      const data = await fetchAPI(target.value, 'nationality', 'Foods');
+      setSearchValue({ ...searchValue, data });
+    }
   };
 
   const { data } = searchValue;
@@ -34,9 +38,14 @@ export default function ExploreFoodsNationalities() {
         <>
           <Header title="Explore Nationalities" search profile />
           <select data-testid="explore-by-nationality-dropdown" onChange={ handleChange }>
+            <option
+              value="All"
+              data-testid="All-option"
+            >
+              All
+            </option>
             {filterNationality
               && filterNationality
-                .filter((_item, index) => index < +'12')
                 .map(({ strArea }, index) => (
                   <option
                     key={ index }
