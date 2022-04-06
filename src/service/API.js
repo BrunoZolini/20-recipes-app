@@ -19,7 +19,12 @@ export async function fetchAPI(value, filters, page) {
       id: `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${value}`,
       random: 'https://www.thecocktaildb.com/api/json/v1/1/random.php',
     },
+    Ingredients: {
+      foods: 'https://www.themealdb.com/api/json/v1/1/list.php?i=list',
+      drinks: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list',
+    },
   };
+
   const request = await fetch(getData[page][filters]); // fetching the data from the API
   const response = await request.json();
   if (response.meals === null) response.meals = [];
