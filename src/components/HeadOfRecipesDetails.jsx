@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 import {
   setFavoriteRecipes,
   getFavoriteRecipes,
   deleteFavoriteRecipe,
 } from '../service/localStorage';
 import ShareButton from './ShareButton';
+import FavoriteButton from './FavoriteButton';
 
 export default function HeadOfRecipesDetails({
   thumb,
@@ -56,18 +55,12 @@ export default function HeadOfRecipesDetails({
 
       <ShareButton type={ type } id={ id } datatest="share-btn" />
 
-      <div>
-        <button
-          type="button"
-          onClick={ handleFavoriteButton }
-        >
-          <img
-            data-testid="favorite-btn"
-            alt="favorite-btn"
-            src={ favorite ? blackHeartIcon : whiteHeartIcon }
-          />
-        </button>
-      </div>
+      <FavoriteButton
+        favorite={ favorite }
+        handleFavoriteButton={ handleFavoriteButton }
+        datatest="favorite-btn"
+      />
+
       <p data-testid="recipe-category">
         { category }
       </p>

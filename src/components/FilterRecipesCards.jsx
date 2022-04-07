@@ -1,15 +1,23 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import context from '../context/myContext';
 import ShareButton from './ShareButton';
-import '../styles/DoneRecipesCards.css';
+import '../styles/FilterRecipesCards.css';
+import FavoriteButton from './FavoriteButton';
+import { deleteFavoriteRecipe, getFavoriteRecipes } from '../service/localStorage';
 
-export default function DoneRecipesCards() {
-  const { doneRecipes } = useContext(context);
+export default function FilterRecipesCards({ isFavorite }) {
+  const { filterRecipes, setFilterRecipes } = useContext(context);
+  const handleFavoriteButton = (id) => {
+    console.log(id);
+    deleteFavoriteRecipe(id);
+    setFilterRecipes(getFavoriteRecipes());
+  };
 
   return (
     <div>
-      {doneRecipes && doneRecipes.map((item, index) => (
+      {filterRecipes && filterRecipes.map((item, index) => (
         <div className="cards-container" key={ item.id }>
           <Link
             className="card-display"
@@ -28,7 +36,7 @@ export default function DoneRecipesCards() {
               ? `${item.nationality} - ${item.category}` : item.alcoholicOrNot }
           </p>
           <p data-testid={ `${index}-horizontal-done-date` }>{ item.doneDate }</p>
-          {item.tags.map((tag, i) => (
+          { !isFavorite && item.tags.map((tag, i) => (
             <p
               key={ i }
               data-testid={ `${index}-${tag}-horizontal-tag` }
@@ -41,8 +49,17 @@ export default function DoneRecipesCards() {
             id={ item.id }
             datatest={ `${index}-horizontal-share-btn` }
           />
+          { isFavorite && <FavoriteButton
+            favorite
+            handleFavoriteButton={ () => handleFavoriteButton(item.id) }
+            datatest={ `${index}-horizontal-favorite-btn` }
+          /> }
         </div>
       ))}
     </div>
   );
 }
+
+FilterRecipesCards.propTypes = {
+  isFavorite: PropTypes.bool,
+}.isRequired;

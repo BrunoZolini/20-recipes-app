@@ -1,21 +1,21 @@
 import React, { useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import context from '../context/myContext';
-import { getDoneRecipes } from '../service/localStorage';
 
-export default function DoneRecipesFilters() {
-  const { setDoneRecipes } = useContext(context);
+export default function RecipesFilters({ getData }) {
+  const { setFilterRecipes } = useContext(context);
 
   useEffect(() => {
-    setDoneRecipes(getDoneRecipes());
+    setFilterRecipes(getData());
   }, []);
 
   const handleClickButton = ({ target: { name } }) => {
-    const allDoneRecipes = getDoneRecipes();
+    const allDoneRecipes = getData();
     if (name === 'All') {
-      setDoneRecipes(allDoneRecipes);
+      setFilterRecipes(allDoneRecipes);
     } else {
       const filterDoneRecipes = allDoneRecipes.filter(({ type }) => name === type);
-      setDoneRecipes(filterDoneRecipes);
+      setFilterRecipes(filterDoneRecipes);
     }
   };
 
@@ -48,3 +48,7 @@ export default function DoneRecipesFilters() {
     </div>
   );
 }
+
+RecipesFilters.propTypes = {
+  getData: PropTypes.func,
+}.isRequired;
