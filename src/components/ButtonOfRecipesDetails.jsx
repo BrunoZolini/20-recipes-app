@@ -1,12 +1,22 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { setInProgressRecipes, getInProgressRecipes } from '../service/localStorage';
+import {
+  setInProgressRecipes,
+  getInProgressRecipes,
+  setDoneRecipes,
+} from '../service/localStorage';
 import context from '../context/myContext';
 
 export default function ButtonOfRecipesDetails({
-  page,
   id,
+  page,
+  nationality,
+  drinkCategory,
+  category,
+  title,
+  thumb,
+  tag,
   searchType,
   ingredientMeasure,
   finishRecipe,
@@ -28,7 +38,27 @@ export default function ButtonOfRecipesDetails({
     setInProgressRecipes(id, searchType, ingredientMeasure);
   };
 
+  const getDate = () => {
+    const date = new Date();
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
   const handleClickButtonFinish = () => {
+    const recipe = {
+      id,
+      type: page.substr(0, page.length - 1),
+      nationality,
+      category: page === 'foods' ? category : drinkCategory,
+      alcoholicOrNot: page === 'drinks' ? category : '',
+      name: title,
+      image: thumb,
+      doneDate: getDate(),
+      tags: tag.split(','),
+    };
+    setDoneRecipes(recipe);
     history.push('/done-recipes');
   };
 
