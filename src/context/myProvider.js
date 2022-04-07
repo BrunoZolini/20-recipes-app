@@ -11,7 +11,7 @@ function Provider({ children }) {
   const [ingredientsList, setIngredientsList] = useState([]);
   const [filterIngredient, setFilterIngredient] = useState('');
   const [ingredientsChecked, setIngredientsChecked] = useState([]);
-  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [filterRecipes, setFilterRecipes] = useState([]);
 
   const state = {
     searchValue,
@@ -22,8 +22,8 @@ function Provider({ children }) {
     setFilterIngredient,
     ingredientsChecked,
     setIngredientsChecked,
-    doneRecipes,
-    setDoneRecipes,
+    filterRecipes,
+    setFilterRecipes,
   };
 
   return (
