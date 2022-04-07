@@ -97,12 +97,43 @@ export const getFavoriteRecipes = () => {
   return [];
 };
 
-/* favoriteREcipes [{
-    id: id-da-receita,
-    type: food-ou-drink,
-    nationality: nacionalidade-da-receita-ou-texto-vazio,
-    category: categoria-da-receita-ou-texto-vazio,
-    alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
-    name: nome-da-receita,
-    image: imagem-da-receita
-}] */
+export const setDoneRecipes = (obj) => {
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (doneRecipes) {
+    const doneObj = {
+      id: obj.id,
+      type: obj.type,
+      nationality: obj.nationality,
+      category: obj.category,
+      alcoholicOrNot: obj.alcoholicOrNot,
+      name: obj.name,
+      image: obj.image,
+      doneDate: obj.doneDate,
+      tags: obj.tags,
+    };
+    localStorage.setItem('doneRecipes', JSON.stringify(
+      [...doneRecipes, doneObj],
+    ));
+  } else {
+    const doneArr = [{
+      id: obj.id,
+      type: obj.type,
+      nationality: obj.nationality,
+      category: obj.category,
+      alcoholicOrNot: obj.alcoholicOrNot,
+      name: obj.name,
+      image: obj.image,
+      doneDate: obj.doneDate,
+      tags: obj.tags,
+    }];
+    localStorage.setItem('doneRecipes', JSON.stringify(doneArr));
+  }
+};
+
+export const getDoneRecipes = () => {
+  const localReturn = localStorage.getItem('doneRecipes');
+  if (localReturn) {
+    return JSON.parse(localReturn);
+  }
+  return [];
+};

@@ -3,7 +3,7 @@ import clipboardCopy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 
-export default function ShareButton({ type, id }) {
+export default function ShareButton({ type, id, datatest }) {
   const [isCopied, setIsCopied] = useState(false);
 
   const handleShareButton = () => {
@@ -17,7 +17,7 @@ export default function ShareButton({ type, id }) {
         type="button"
         onClick={ handleShareButton }
       >
-        <img data-testid="share-btn" alt="shareIcon" src={ shareIcon } />
+        <img data-testid={ datatest } alt="shareIcon" src={ shareIcon } />
       </button>
       {isCopied && <p>Link copied!</p>}
     </div>

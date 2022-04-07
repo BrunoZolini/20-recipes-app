@@ -85,8 +85,14 @@ export default function RecipesDetails({
           />}
 
           <ButtonOfRecipesDetails
-            page={ page }
             id={ id }
+            page={ page }
+            nationality={ page === 'foods' ? recipe.strArea : '' }
+            drinkCategory={ recipe.strCategory }
+            category={ page === 'foods' ? (recipe.strCategory) : (recipe.strAlcoholic) }
+            title={ recipe[`str${strType}`] }
+            thumb={ recipe[`str${strType}Thumb`] }
+            tag={ recipe.strTags ? recipe.strTags : '' }
             searchType={ searchType }
             ingredientMeasure={ ingredientMeasures }
             finishRecipe={ inProgress }

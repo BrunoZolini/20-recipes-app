@@ -54,17 +54,7 @@ export default function HeadOfRecipesDetails({
       />
       <h1 data-testid="recipe-title">{title}</h1>
 
-      <ShareButton type={ type } id={ id } />
-
-      {/* <div>
-        <button
-          type="button"
-          onClick={ handleShareButton }
-        >
-          <img data-testid="share-btn" alt="shareIcon" src={ shareIcon } />
-        </button>
-        {isCopied && <p>Link copied!</p>}
-      </div> */}
+      <ShareButton type={ type } id={ id } datatest="share-btn" />
 
       <div>
         <button
