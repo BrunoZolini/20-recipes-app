@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { fetchAPI, fetchCategoriesAPI } from '../service/API';
 import context from '../context/myContext';
+import '../styles/CategoriesList.css';
 
 export default function CategoriesList({ page, type }) {
   const [categories, setCategories] = useState([]);
@@ -32,8 +33,8 @@ export default function CategoriesList({ page, type }) {
   };
 
   return (
-    <form>
-      <label htmlFor="All">
+    <form className="categories-section">
+      <label className="categories-label" htmlFor="All">
         <input
           data-testid="All-category-filter"
           id="All"
@@ -51,7 +52,7 @@ export default function CategoriesList({ page, type }) {
       && categories[type].filter((_item, index) => index < maxItens)
         .map(({ strCategory }, index) => (
           <div key={ index }>
-            <label htmlFor={ strCategory }>
+            <label className="categories-label" htmlFor={ strCategory }>
               <input
                 data-testid={ `${strCategory}-category-filter` }
                 id={ strCategory }

@@ -1,0 +1,12 @@
+.categories-section {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.categories-label {
+  width: 100px;
+  word-break: break-all;
+}
