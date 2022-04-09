@@ -34,7 +34,13 @@ export default function RecipesCards({
                 src={ item[`str${strType}Thumb`] }
                 alt={ item[`str${strType}`] }
               />
-              <p data-testid={ `${index}-card-name` }>{item[`str${strType}`]}</p>
+              <p
+                className="card-name"
+                data-testid={ `${index}-card-name` }
+              >
+                {item[`str${strType}`]}
+
+              </p>
             </div>
           </Link>
         )) }

@@ -7,6 +7,7 @@ import {
 } from '../service/localStorage';
 import ShareButton from './ShareButton';
 import FavoriteButton from './FavoriteButton';
+import '../styles/DetailsPage.css';
 
 export default function HeadOfRecipesDetails({
   thumb,
@@ -47,6 +48,7 @@ export default function HeadOfRecipesDetails({
   return (
     <div>
       <img
+        className="detais-img"
         data-testid="recipe-photo"
         src={ thumb }
         alt=""
