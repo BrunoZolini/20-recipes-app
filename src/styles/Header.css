@@ -1,0 +1,21 @@
+.header-section {
+  background-color: #a45c40;
+  box-shadow: 0 0 4px 4px rgb(192, 189, 189);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.header-title {
+  background-color: #a45c40;
+  margin-top: 10px;
+}
+
+.header-button {
+  background-color: #a45c40;
+  border: 0;
+}
+
+.header-button-img {
+  background-color: #a45c40;
+}
