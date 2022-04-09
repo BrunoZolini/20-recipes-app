@@ -1,5 +1,19 @@
 footer {
+  background-color: #a45c40;
   bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 3px;
   position: fixed;
   width: 100%;
+}
+
+.footer-button {
+  background-color: #a45c40;
+  border: 0;
+  margin-right: 10px;
+}
+
+.footer-button-img {
+  background-color: #a45c40;
 }
