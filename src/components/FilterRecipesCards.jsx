@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import context from '../context/myContext';
 import ShareButton from './ShareButton';
-import '../styles/FilterRecipesCards.css';
+import '../styles/RecipesCards.css';
 import FavoriteButton from './FavoriteButton';
 import { deleteFavoriteRecipe, getFavoriteRecipes } from '../service/localStorage';
 

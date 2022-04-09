@@ -36,6 +36,7 @@ export default function CategoriesList({ page, type }) {
     <form className="categories-section">
       <label className="categories-label" htmlFor="All">
         <input
+          className="categories-input"
           data-testid="All-category-filter"
           id="All"
           name="filterCheckbox"
@@ -54,6 +55,7 @@ export default function CategoriesList({ page, type }) {
           <div key={ index }>
             <label className="categories-label" htmlFor={ strCategory }>
               <input
+                className="categories-input"
                 data-testid={ `${strCategory}-category-filter` }
                 id={ strCategory }
                 name="filterCheckbox"

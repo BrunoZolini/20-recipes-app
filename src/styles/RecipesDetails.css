@@ -4,8 +4,8 @@
 }
 
 .scrollbar {
-  height: 140px;
-  margin: 20px;
+  height: 200px;
+  margin-right: 20px;
   overflow-x: auto;
-  width: 300px;
+  width: 360px;
 }
