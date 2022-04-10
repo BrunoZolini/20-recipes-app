@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { fetchAPI } from '../service/API';
+import '../styles/ExploreDrinks.css';
 
 export default function ExploreDrinks() {
   const history = useHistory();
@@ -16,18 +17,25 @@ export default function ExploreDrinks() {
   return (
     <div>
       <Header title="Explore Drinks" search={ false } profile />
-      <Link to="/explore/drinks/ingredients">
-        <button type="button" data-testid="explore-by-ingredient">
-          By Ingredient
+      <section className="explore-drinks-container">
+        <Link to="/explore/drinks/ingredients">
+          <button
+            className="explore-drinks-button"
+            type="button"
+            data-testid="explore-by-ingredient"
+          >
+            By Ingredient
+          </button>
+        </Link>
+        <button
+          className="explore-drinks-button"
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ handleClick }
+        >
+          Surprise me!
         </button>
-      </Link>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ handleClick }
-      >
-        Surprise me!
-      </button>
+      </section>
       <Footer />
     </div>
   );
