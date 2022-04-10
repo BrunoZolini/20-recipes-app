@@ -9,7 +9,7 @@ export default function RecommendedOfRecipesDetails({
 }) {
   return (
     <div>
-      <h3>Recommended</h3>
+      <h3 className="subtitle">Recommended</h3>
       <div className="scrollbar">
         <RecipesCards
           searchType={ reverseSearch }

@@ -7,7 +7,7 @@
 
 .card-display {
   align-items: center;
-  background-color: #f5d4b5;
+  background-color: #e9d6c5bb;
   border-radius: 20px;
   box-shadow: 2px 2px 4px 4px rgb(192, 189, 189);
   color: black;
@@ -27,5 +27,20 @@
 }
 
 .card-name {
-  background-color: #f5d4b5;
+  background-color: #e9d6c5bb;
+}
+
+.video {
+  margin-bottom: 10px;
+}
+
+.startRecipe {
+  background-color: #dfb59dad;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px 2px rgb(192, 189, 189);
+  font-weight: 700;
+  margin-top: 20px;
+  padding: 3px;
+  width: 360px;
 }

@@ -53,20 +53,25 @@ export default function HeadOfRecipesDetails({
         src={ thumb }
         alt=""
       />
-      <h1 data-testid="recipe-title">{title}</h1>
+      <div className="details-title-section">
+        <section>
+          <h1 data-testid="recipe-title">{title}</h1>
 
-      <ShareButton type={ type } id={ id } datatest="share-btn" />
+          <p className="recipe-category" data-testid="recipe-category">
+            { category }
+          </p>
+        </section>
 
-      <FavoriteButton
-        favorite={ favorite }
-        handleFavoriteButton={ handleFavoriteButton }
-        datatest="favorite-btn"
-      />
+        <section className="details-buttons-section">
+          <ShareButton type={ type } id={ id } datatest="share-btn" />
 
-      <p data-testid="recipe-category">
-        { category }
-      </p>
-
+          <FavoriteButton
+            favorite={ favorite }
+            handleFavoriteButton={ handleFavoriteButton }
+            datatest="favorite-btn"
+          />
+        </section>
+      </div>
     </div>
   );
 }

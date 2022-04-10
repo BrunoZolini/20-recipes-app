@@ -7,6 +7,7 @@ export default function FavoriteButton({ favorite, handleFavoriteButton, datates
   return (
     <div>
       <button
+        className="button-share-favorite"
         type="button"
         onClick={ handleFavoriteButton }
       >
