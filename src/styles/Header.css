@@ -19,3 +19,8 @@
 .header-button-img {
   background-color: #a45c40;
 }
+
+.fake-button {
+  background-color: #a45c40;
+  width: 40px;
+}

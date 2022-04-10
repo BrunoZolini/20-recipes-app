@@ -12,7 +12,7 @@ export default function Header({ title, profile, search }) {
   return (
     <header>
       <div className="header-section">
-        {profile && (
+        {profile ? (
           <button
             className="header-button"
             type="button"
@@ -25,14 +25,14 @@ export default function Header({ title, profile, search }) {
               src={ profileIcon }
             />
           </button>
-        )}
+        ) : <span className="fake-button" />}
         <h3
           className="header-title"
           data-testid="page-title"
         >
           {title}
         </h3>
-        {search && (
+        {search ? (
           <button
             className="header-button"
             type="button"
@@ -45,7 +45,7 @@ export default function Header({ title, profile, search }) {
               src={ searchIcon }
             />
           </button>
-        )}
+        ) : <span className="fake-button" />}
       </div>
       {isDisabled && (
         <div>

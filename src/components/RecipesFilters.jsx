@@ -20,8 +20,9 @@ export default function RecipesFilters({ getData }) {
   };
 
   return (
-    <div>
+    <div className="done-recipes-buttons-section">
       <button
+        className="done-recipes-button"
         name="All"
         type="button"
         onClick={ handleClickButton }
@@ -30,6 +31,7 @@ export default function RecipesFilters({ getData }) {
         All
       </button>
       <button
+        className="done-recipes-button"
         name="food"
         type="button"
         onClick={ handleClickButton }
@@ -38,6 +40,7 @@ export default function RecipesFilters({ getData }) {
         Food
       </button>
       <button
+        className="done-recipes-button"
         name="drink"
         type="button"
         onClick={ handleClickButton }
