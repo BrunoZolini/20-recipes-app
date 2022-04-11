@@ -1,0 +1,18 @@
+.select-nationalities {
+  background-color: #a45c4054;
+  border-color: #a45c40;
+  font-size: 14px;
+  height: 30px;
+  margin-left: 20px;
+  padding: 5px;
+  padding-left: 10px;
+  width: 89%;
+}
+
+.option-all {
+  background-color: #e9d6c5bb;
+}
+
+.option-nationalities {
+  background-color: #e9d6c5bb;
+}
