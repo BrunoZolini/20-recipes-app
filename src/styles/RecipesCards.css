@@ -1,13 +1,19 @@
 .cards-container {
   display: flex;
   flex-wrap: wrap;
-  width: 250px;
+  justify-content: center;
+  margin-bottom: 60px;
 }
 
 .card-display {
+  align-items: center;
+  background-color: #e9d6c5bb;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px 4px rgb(192, 189, 189);
   color: black;
   margin: 10px;
   text-align: center;
+  width: 150px;
 }
 
 .card-display:hover {
@@ -16,5 +22,11 @@
 }
 
 .card-img {
-  width: 100px;
+  border-radius: 10px 10px 0 0;
+  width: 150px;
 }
+
+.card-name {
+  background-color: #e9d6c5bb;
+}
+

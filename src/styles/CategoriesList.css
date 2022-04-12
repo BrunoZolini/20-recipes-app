@@ -1,0 +1,28 @@
+.categories-section {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.categories-label {
+  align-items: center;
+  display: flex;
+  width: 100px;
+  word-break: break-all;
+}
+
+.categories-input {
+  all: unset;
+  border: 1px solid black;
+  border-radius: 3px;
+  display: inline-block;
+  height: 13px;
+  margin: 3px;
+  width: 13px;
+}
+
+.categories-input:checked {
+  background-color: #a45c40;
+}

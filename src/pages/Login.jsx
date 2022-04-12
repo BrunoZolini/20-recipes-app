@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import RecipediaLogo from '../images/RecipediaLogo.png';
+import '../styles/Login.css';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -27,21 +29,25 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <form>
+    <div className="login-section">
+      <form className="login-form">
+        <img className="login-logo" src={ RecipediaLogo } alt="RecipediaLogo" />
         <input
+          className="input-login"
           data-testid="email-input"
-          placeholder="email"
+          placeholder="Email"
           type="email"
           onChange={ ({ target }) => setEmail(target.value) }
         />
         <input
+          className="input-login"
           data-testid="password-input"
           type="password"
-          placeholder="password"
+          placeholder="Password"
           onChange={ ({ target }) => setPassword(target.value) }
         />
         <button
+          className="button-login"
           type="submit"
           data-testid="login-submit-btn"
           disabled={ isDisabled }
@@ -50,6 +56,9 @@ export default function Login() {
           Enter
         </button>
       </form>
+      <p className="login-copyright">
+        Copyright © 2022 Grupo 19 - Turma XP - Todos os direitos reservados
+      </p>
     </div>
   );
 }

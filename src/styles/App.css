@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&display=swap') ;
+
+* {
+  background-color: #f6eee0;
+  font-family: Merienda , cursive;
+}
+
+.button-share-favorite {
+  border: none;
+}
+
+.link-message {
+  font-size: 10px;
+}
+
+.share-button-section {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+}

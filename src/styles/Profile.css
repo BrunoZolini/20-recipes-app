@@ -1,0 +1,19 @@
+.email-profile {
+  margin-left: 25%;
+  margin-top: 25px;
+}
+
+.profile-container {
+  margin: 10px;
+}
+
+.profile-button {
+  background-color: #a45c4054;
+  border: 0;
+  border-radius: 5px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  padding: 3px;
+  width: 100%;
+}

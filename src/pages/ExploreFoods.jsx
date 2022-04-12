@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { fetchAPI } from '../service/API';
+import '../styles/ExploreFoods.css';
 
 export default function ExploreFoods() {
   const history = useHistory();
@@ -15,19 +16,34 @@ export default function ExploreFoods() {
   return (
     <div>
       <Header title="Explore Foods" search={ false } profile />
-      <Link to="/explore/foods/ingredients">
-        <button type="button" data-testid="explore-by-ingredient">
-          By Ingredient
+      <section className="explore-foods-container">
+        <Link to="/explore/foods/ingredients">
+          <button
+            className="explore-foods-button"
+            type="button"
+            data-testid="explore-by-ingredient"
+          >
+            By Ingredient
+          </button>
+        </Link>
+        <Link to="/explore/foods/nationalities">
+          <button
+            className="explore-foods-button"
+            type="button"
+            data-testid="explore-by-nationality"
+          >
+            By Nationality
+          </button>
+        </Link>
+        <button
+          className="explore-foods-button"
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ handleClick }
+        >
+          Surprise me!
         </button>
-      </Link>
-      <Link to="/explore/foods/nationalities">
-        <button type="button" data-testid="explore-by-nationality">
-          By Nationality
-        </button>
-      </Link>
-      <button type="button" data-testid="explore-surprise" onClick={ handleClick }>
-        Surprise me!
-      </button>
+      </section>
       <Footer />
     </div>
   );

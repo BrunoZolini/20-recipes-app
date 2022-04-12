@@ -12,14 +12,15 @@ export default function ShareButton({ type, id, datatest }) {
   };
 
   return (
-    <div>
+    <div className="share-button-section">
+      {isCopied && <p className="link-message">Link copied!</p>}
       <button
+        className="button-share-favorite"
         type="button"
         onClick={ handleShareButton }
       >
         <img data-testid={ datatest } alt="shareIcon" src={ shareIcon } />
       </button>
-      {isCopied && <p>Link copied!</p>}
     </div>
   );
 }

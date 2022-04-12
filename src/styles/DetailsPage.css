@@ -1,0 +1,87 @@
+.ingredientCheckbox {
+  color: black;
+  text-decoration: line-through;
+}
+
+.detais-img {
+  height: 200px;
+  margin-bottom: 10px;
+  width: 360px;
+}
+
+.details-title-section {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.details-buttons-section {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 10px;
+}
+
+.recipe-category {
+  color: rgba(0, 0, 0, 0.651);
+  margin-left: 5px;
+}
+
+.details-ingredients-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.subtitle {
+  font-size: 22px;
+  margin-left: 8px;
+}
+
+.details-ingredients-item {
+  background-color: #e9d6c5bb;
+  margin-bottom: 2px;
+}
+
+.details-instructions-section {
+  background-color: #e9d6c5bb;
+  font-size: 14px;
+  margin: 10px;
+  padding: 10px;
+  text-align: justify;
+}
+
+.details-input-checkbox {
+  all: unset;
+  border: 1px solid black;
+  border-radius: 3px;
+  display: inline-block;
+  height: 13px;
+  margin: 3px;
+  width: 13px;
+}
+
+.details-input-checkbox:checked {
+  background-color: #a45c40;
+}
+
+.video {
+  margin-bottom: 10px;
+}
+
+.startRecipe {
+  background-color: #dfb59dad;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px 2px rgb(192, 189, 189);
+  font-weight: 700;
+  margin-top: 20px;
+  padding: 3px;
+  width: 360px;
+}
+
+.startRecipe:disabled {
+  display: none;
+}

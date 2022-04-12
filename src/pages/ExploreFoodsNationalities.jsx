@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import { fetchAPI } from '../service/API';
 import RecipesCards from '../components/RecipesCards';
 import context from '../context/myContext';
+import '../styles/SelectNationalities.css';
 
 export default function ExploreFoodsNationalities() {
   const [filterNationality, setFilterNationality] = useState([]);
@@ -37,8 +38,13 @@ export default function ExploreFoodsNationalities() {
       {data.meals && (
         <>
           <Header title="Explore Nationalities" search profile />
-          <select data-testid="explore-by-nationality-dropdown" onChange={ handleChange }>
+          <select
+            className="select-nationalities"
+            data-testid="explore-by-nationality-dropdown"
+            onChange={ handleChange }
+          >
             <option
+              className="option-all"
               value="All"
               data-testid="All-option"
             >
@@ -48,6 +54,7 @@ export default function ExploreFoodsNationalities() {
               && filterNationality
                 .map(({ strArea }, index) => (
                   <option
+                    className="option-nationalities"
                     key={ index }
                     value={ strArea }
                     data-testid={ `${strArea}-option` }

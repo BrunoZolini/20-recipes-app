@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { fetchAPI } from '../service/API';
 import context from '../context/myContext';
+import '../styles/SearchBar.css';
 
 function SearchBar({ page }) {
   const history = useHistory();
@@ -44,8 +45,9 @@ function SearchBar({ page }) {
   };
 
   return (
-    <form>
+    <form className="searchbar-section">
       <input
+        className="searchbar-input"
         data-testid="search-input"
         type="text"
         placeholder="Search..."
@@ -53,41 +55,49 @@ function SearchBar({ page }) {
         onChange={ handleChange }
       />
       <div>
-        <label htmlFor="ingredient">
-          Ingredient
+        <label className="searchbar-label" htmlFor="ingredient">
           <input
             defaultChecked
+            className="searchbar-radio"
             name="filter"
             onChange={ handleChecked }
             value="ingredient"
             type="radio"
             data-testid="ingredient-search-radio"
           />
+          Ingredient
         </label>
-        <label htmlFor="name">
-          Name
+        <label htmlFor="name" className="searchbar-label">
           <input
+            className="searchbar-radio"
             name="filter"
             onChange={ handleChecked }
             value="name"
             type="radio"
             data-testid="name-search-radio"
           />
+          Name
         </label>
-        <label htmlFor="Letter">
-          First letter
+        <label htmlFor="Letter" className="searchbar-label">
           <input
+            className="searchbar-radio"
             name="filter"
             onChange={ handleChecked }
             value="letter"
             type="radio"
             data-testid="first-letter-search-radio"
           />
+          First letter
         </label>
-        <button type="submit" data-testid="exec-search-btn" onClick={ handleSubmit }>
-          Search
-        </button>
       </div>
+      <button
+        className="searchbar-button"
+        type="submit"
+        data-testid="exec-search-btn"
+        onClick={ handleSubmit }
+      >
+        Search
+      </button>
     </form>
   );
 }

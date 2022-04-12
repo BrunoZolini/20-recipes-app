@@ -6,7 +6,7 @@ import {
   addIngredientOnList,
   setInProgressRecipes,
 } from '../service/localStorage';
-import '../styles/IngredientsListOfRecipesDetails.css';
+import '../styles/RecipesDetails.css';
 import context from '../context/myContext';
 
 export default function IngredientsListOfRecipesDetails({
@@ -33,11 +33,11 @@ export default function IngredientsListOfRecipesDetails({
     const label = target.parentNode;
     const text = label.innerText;
     if (target.checked) {
-      label.className = 'ingredientCheckbox';
+      label.className = 'ingredientCheckbox details-ingredients-item';
       deleteIngredientFromList(searchType, id, text);
       updateChecked();
     } else {
-      label.className = '';
+      label.className = 'details-ingredients-item';
       const list = ingredientMeasure.filter(
         (item) => ingredientsChecked.includes(item) || item.includes(text),
       );
@@ -48,34 +48,44 @@ export default function IngredientsListOfRecipesDetails({
 
   return (
     <div>
-      {ingredientMeasure.map((item, index) => (inProgress ? (
-        <label
-          key={ index }
-          htmlFor={ `${index}` }
-          data-testid={ `${index}-ingredient-step` }
-          className={
-            ingredientsChecked
-              && !ingredientsChecked.some((ingredient) => ingredient.includes(item))
-              ? 'ingredientCheckbox'
-              : ''
-          }
-        >
-          <input
-            id={ `${index}` }
-            type="checkbox"
-            onChange={ addClassName }
-            checked={
+      <h3 className="subtitle">Ingredients</h3>
+      <div className="details-ingredients-section">
+
+        {ingredientMeasure.map((item, index) => (inProgress ? (
+          <label
+            key={ index }
+            htmlFor={ `${index}` }
+            data-testid={ `${index}-ingredient-step` }
+            className={
               ingredientsChecked
-                && !ingredientsChecked.some((ingredient) => ingredient.includes(item))
+              && !ingredientsChecked.some((ingredient) => ingredient.includes(item))
+                ? 'ingredientCheckbox details-ingredients-item'
+                : 'details-ingredients-item'
             }
-          />
-          {item}
-        </label>
-      ) : (
-        <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-          {item}
-        </p>
-      )))}
+          >
+            <input
+              className="details-input-checkbox"
+              id={ `${index}` }
+              type="checkbox"
+              onChange={ addClassName }
+              checked={
+                ingredientsChecked
+                && !ingredientsChecked.some((ingredient) => ingredient.includes(item))
+              }
+            />
+            {item}
+          </label>
+        ) : (
+          <p
+            className="details-ingredients-item"
+            key={ index }
+            data-testid={ `${index}-ingredient-name-and-measure` }
+          >
+            {item}
+          </p>
+        )))}
+      </div>
+
     </div>
   );
 }

@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import FilterRecipesCards from '../components/FilterRecipesCards';
 import RecipesFilters from '../components/RecipesFilters';
 import { getDoneRecipes } from '../service/localStorage';
+import '../styles/DoneRecipes.css';
 
 export default function DoneRecipes() {
   return (

@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 export default function ButtonOfRecipesDetails({ instructions }) {
   return (
     <div>
-      <p data-testid="instructions">{instructions}</p>
+      <h3 className="subtitle">Instructions</h3>
+      <p
+        className="details-instructions-section"
+        data-testid="instructions"
+      >
+        {instructions}
+      </p>
     </div>
   );
 }
